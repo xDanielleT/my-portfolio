@@ -83,7 +83,7 @@ export const About = () => {
                                 (2024)
                             </li>
                             <li>
-                            Training in full-stack development spanning front-end frameworks, back-end programming, database management, API design, and deployment practices."
+                            Training in full-stack development spanning front-end frameworks, back-end programming, database management, API design, and deployment practices.
                             </li>
                         </ul>
                     </div>

@@ -80,6 +80,8 @@ export const Projects = () => {
               <div className="flex justify-between items-center">
                 <a
                   href="https://www.wecodekc.org/services"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
                   View Project →
