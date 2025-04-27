@@ -328,7 +328,7 @@ export const Projects = () => {
                 </a>
 
                 <a
-                  href="https://chat-8quxi00e6-danielles-projects-b692508c.vercel.app/"
+                  href="https://chat-app-alpha-virid-53.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
