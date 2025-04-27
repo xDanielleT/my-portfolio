@@ -48,7 +48,7 @@ export const Projects = () => {
                   View Project →
                 </a>
                 <a
-                  href="https://xdaniellet.github.io/font-sampler/" 
+                  href="https://xdaniellet.github.io/font-sampler/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
@@ -93,7 +93,8 @@ export const Projects = () => {
                   rel="noopener noreferrer"
                   className="text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
-                  View Project →
+                  🌐
+                  View Demo →
                 </a>
               </div>
             </div>
@@ -138,7 +139,6 @@ export const Projects = () => {
                   <FaGithub className="text-lg" />
                   View Project →
                 </a>
-
               </div>
             </div>
 
@@ -184,6 +184,15 @@ export const Projects = () => {
                   View Project →
                 </a>
 
+                <a
+                  href="https://xdaniellet.github.io/image-classifier/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                >
+                  🌐
+                  View Demo →
+                </a>
               </div>
             </div>
 
@@ -224,8 +233,8 @@ export const Projects = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
-                  <FaPenNib className="text-lg" />
-                  View Project →
+                  🌐
+                  View Demo →
                 </a>
 
               </div>
@@ -269,7 +278,8 @@ export const Projects = () => {
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
 
-                  View Project →
+                  🌐
+                  View Demo →
                 </a>
 
               </div>
@@ -317,6 +327,15 @@ export const Projects = () => {
                   View Project →
                 </a>
 
+                <a
+                  href="https://chat-8quxi00e6-danielles-projects-b692508c.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                >
+                  🌐
+                  View Demo →
+                </a>
               </div>
             </div>
 
@@ -357,6 +376,15 @@ export const Projects = () => {
                 >
                   <FaGithub className="text-lg" />
                   View Project →
+                </a>
+                <a
+                  href="https://xdaniellet.github.io/memory-card/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                >
+                  🌐
+                  View Demo →
                 </a>
               </div>
             </div>
