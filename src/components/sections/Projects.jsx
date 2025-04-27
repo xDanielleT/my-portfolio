@@ -38,7 +38,7 @@ export const Projects = () => {
               </div>
 
               <div className="flex justify-between items-center">
-              <a
+                <a
                   href="https://github.com/xDanielleT/font-sampler"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -46,7 +46,16 @@ export const Projects = () => {
                 >
                   <FaGithub className="text-lg" />
                   View Project →
-              </a>
+                </a>
+                <a
+                  href="https://xdaniellet.github.io/font-sampler/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                >
+                  🌐
+                  View Demo →
+                </a>
               </div>
             </div>
             <div
@@ -59,10 +68,10 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">Development Services Webpage</h3>
               <p className="text-gray-400 mb-4">
-              Collaborated on the development of a professional services page for a local company to create a dynamic and responsive user experience. 
+                Collaborated on the development of a professional services page for a local company to create a dynamic and responsive user experience.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {[ "HTML", "React", "TailwindCSS"].map((tech, key) => (
+                {["HTML", "React", "TailwindCSS"].map((tech, key) => (
                   <span
                     key={key}
                     className="
@@ -99,7 +108,7 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">Todo List</h3>
               <p className="text-gray-400 mb-4">
-              PHP-based to-do list application that allows users to add, complete, and delete tasks using session storage without a database.
+                PHP-based to-do list application that allows users to add, complete, and delete tasks using session storage without a database.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["PHP", "HTML", "CSS"].map(
@@ -128,7 +137,7 @@ export const Projects = () => {
                 >
                   <FaGithub className="text-lg" />
                   View Project →
-              </a>
+                </a>
 
               </div>
             </div>
@@ -144,10 +153,10 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">AI Image Classifier</h3>
               <p className="text-gray-400 mb-4">
-              A browser-based image classifier that uses TensorFlow.js and MobileNet to identify objects in images using the ImageNet 1000 class list.
+                A browser-based image classifier that uses TensorFlow.js and MobileNet to identify objects in images using the ImageNet 1000 class list.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {[ "HTML", "CSS", "JavaScript"].map(
+                {["HTML", "CSS", "JavaScript"].map(
                   (tech) => (
                     <span
                       key={tech}
@@ -173,10 +182,10 @@ export const Projects = () => {
                 >
                   <FaGithub className="text-lg" />
                   View Project →
-              </a>
+                </a>
 
               </div>
-            </div>    
+            </div>
 
             <div
               className="
@@ -188,10 +197,10 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">Codepen Projects</h3>
               <p className="text-gray-400 mb-4">
-              This is a collection of front-end projects I built to strengthen my skills in HTML, CSS, and JavaScript. Each project demonstrates my focus on responsive design, clean code practices, and creativity. I continue to use CodePen as a space to experiment with new ideas and improve my web development skills.
+                This is a collection of front-end projects I built to strengthen my skills in HTML, CSS, and JavaScript. Each project demonstrates my focus on responsive design, clean code practices, and creativity. I continue to use CodePen as a space to experiment with new ideas and improve my web development skills.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {[ ].map(
+                {[].map(
                   (tech) => (
                     <span
                       key={tech}
@@ -217,10 +226,10 @@ export const Projects = () => {
                 >
                   <FaPenNib className="text-lg" />
                   View Project →
-              </a>
+                </a>
 
               </div>
-            </div>    
+            </div>
 
             <div
               className="
@@ -232,10 +241,10 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">KC People's Fund Website</h3>
               <p className="text-gray-400 mb-4">
-              I collaborated with colleagues to design and build the KC People's Fund website using WordPress and Bricks Builder. I contributed to creating a clean, user-friendly layout, ensuring mobile responsiveness, and implementing dynamic features to make content easy for the client to manage. The project focused on accessibility, modern design, and delivering a professional online presence for the organization.
+                I collaborated with colleagues to design and build the KC People's Fund website using WordPress and Bricks Builder. I contributed to creating a clean, user-friendly layout, ensuring mobile responsiveness, and implementing dynamic features to make content easy for the client to manage. The project focused on accessibility, modern design, and delivering a professional online presence for the organization.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {[ "Wordpress", "Bricks Builder", "Plugins", "CSS", "JavaScript", ].map(
+                {["Wordpress", "Bricks Builder", "Plugins", "CSS", "JavaScript",].map(
                   (tech) => (
                     <span
                       key={tech}
@@ -259,12 +268,12 @@ export const Projects = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
-                
+
                   View Project →
-              </a>
+                </a>
 
               </div>
-            </div>    
+            </div>
 
 
             <div
@@ -277,10 +286,10 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">Chat App</h3>
               <p className="text-gray-400 mb-4">
-              A full-stack chat application featuring real-time messaging, typing indicators, and chat history. Built with WebSockets and deployed for live use.
+                A full-stack chat application featuring real-time messaging, typing indicators, and chat history. Built with WebSockets and deployed for live use.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {[ "React", "Vite", "Node.js", "Express", "Socket.io", "Websockets", "Vercel", "Render" ].map(
+                {["React", "Vite", "Node.js", "Express", "Socket.io", "Websockets", "Vercel", "Render"].map(
                   (tech) => (
                     <span
                       key={tech}
@@ -304,9 +313,9 @@ export const Projects = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
-                <FaGithub className="text-lg" />
-                View Project →
-              </a>
+                  <FaGithub className="text-lg" />
+                  View Project →
+                </a>
 
               </div>
             </div>
@@ -340,7 +349,7 @@ export const Projects = () => {
                 ))}
               </div>
               <div className="flex justify-between items-center ">
-              <a
+                <a
                   href="https://github.com/xDanielleT/memory-card?tab=readme-ov-file"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -348,7 +357,7 @@ export const Projects = () => {
                 >
                   <FaGithub className="text-lg" />
                   View Project →
-              </a>
+                </a>
               </div>
             </div>
           </div>
