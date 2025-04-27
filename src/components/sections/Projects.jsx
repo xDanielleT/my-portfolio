@@ -304,8 +304,8 @@ export const Projects = () => {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors my-4"
                 >
-                
-                  View Project →
+                <FaGithub className="text-lg" />
+                View Project →
               </a>
 
               </div>
