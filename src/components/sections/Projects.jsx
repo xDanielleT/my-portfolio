@@ -275,6 +275,50 @@ export const Projects = () => {
               transition-all
             "
             >
+              <h3 className="text-xl font-bold mb-2">Chat App</h3>
+              <p className="text-gray-400 mb-4">
+              A full-stack chat application featuring real-time messaging, typing indicators, and chat history. Built with WebSockets and deployed for live use.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {[ "React", "Vite", "Node.js", "Express", "Socket.io", "Websockets", "Vercel", "Render" ].map(
+                  (tech) => (
+                    <span
+                      key={tech}
+                      className="
+                      bg-purple-500/10 text-purple-500 py-1 px-3 
+                      rounded-full text-sm
+                      transition
+                      hover:bg-purple-500/20 hover:-translate-y-0.5
+                      hover:shadow-[0_0_15px_rgba(147,51,234,0.4)]
+                    "
+                    >
+                      {tech}
+                    </span>
+                  )
+                )}
+              </div>
+              <div className="flex justify-between items-center">
+                <a
+                  href="https://github.com/xDanielleT/chat-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors my-4"
+                >
+                
+                  View Project →
+              </a>
+
+              </div>
+            </div>
+
+            <div
+              className="
+              glass p-6 rounded-xl border border-white/10 
+              hover:-translate-y-1 hover:border-purple-500/30
+              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
+              transition-all
+            "
+            >
               <h3 className="text-xl font-bold mb-2">Memory Card Game</h3>
               <p className="text-gray-400 mb-4">
                 A simple, fun memory card matching game built with HTML, CSS, and JavaScript.
