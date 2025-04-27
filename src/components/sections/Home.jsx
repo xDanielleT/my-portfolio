@@ -11,7 +11,7 @@ export const Home = () => {
                 </h1>
 
                 <p className="tex-gray-400 text-lg mb-8 max-w-lg mx-auto">
-                    I'm a passionate web developer with a keen eye for detail and a love for creating engaging digital experiences. My dedication to growth and improvement drives me to expand my capabilities as a developer.
+                I love bringing ideas to life through modern, responsive websites that are both visually appealing and user-friendly. Every project is a new opportunity to learn, grow, and create something impactful. I'm committed to continuously improving my skills and building experiences that make a difference. Check out my work below!
                 </p>
                 <div className="flex justify-center space-x-4">
                     <a
