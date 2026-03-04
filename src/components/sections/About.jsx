@@ -42,8 +42,7 @@ export const About = () => {
             </p>
 
             <p className="mb-4 leading-relaxed" style={{ color: "var(--light-ink)", fontSize: "0.97rem" }}>
-              The same obsession with craft that makes me debug a misaligned layout at 11pm
-              is what sends me across town to try a new spot someone mentioned once in passing.
+              The same obsession with craft that makes me debug a misaligned layout is what sends me across town to try a new spot someone mentioned once in passing.
             </p>
 
             <p className="mb-8 leading-relaxed" style={{ color: "var(--light-ink)", fontSize: "0.97rem" }}>
@@ -110,7 +109,7 @@ export const About = () => {
             <span className="section-label">Experience</span>
             <div>
               <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2023 – Present</p>
-              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Developer — WeCode KC</p>
+              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Developer — Horton's Tech Innovations</p>
               <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
                 Building responsive web solutions with React, Tailwind, and TypeScript.
                 Technical mentorship, curriculum review, GitHub workflow management,
