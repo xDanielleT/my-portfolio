@@ -1,33 +1,61 @@
-# My Portfolio Website
+# Danielle Turner Portfolio
 
-This is my personal developer portfolio built with **React**, **Vite**, and **Tailwind CSS**.
+Personal portfolio built with React, Vite, and Tailwind CSS.
 
-## 🚀 Live Site
+This project has two working directions:
+- `main` keeps the original developer portfolio version.
+- `foodie-rebrand` adds a food-inspired personal brand direction while keeping the same site structure (`Home`, `About`, `Projects`, `Contact`).
 
-🔗 [View Portfolio](https://my-portfolio-lime-ten.vercel.app/)
+## Live Site
 
-## 📸 Screenshot
-![Screenshot of portfolio](https://i.imgur.com/UqbtOba.png)
+- https://my-portfolio-lime-ten.vercel.app/
 
-## 🛠️ Built With
+## Tech Stack
 
-- [React](https://react.dev/)
-- [Vite](https://vitejs.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- React
+- Vite
+- Tailwind CSS
+- EmailJS
 
-## 📚 Features
+## Features
 
-- Responsive design for mobile, tablet, and desktop
-- Projects section
-- About Me section
-- Contact form 
-- Smooth animations 
-- Deployed to Vercel
+- Responsive layout for mobile and desktop
+- Loading intro screen and scroll reveal animations
+- Project showcase with external demo/repo links
+- Contact form using EmailJS
+- Accessibility-focused contrast updates
 
-## 💻 Getting Started Locally
+## Local Development
 
-If you want to run this project locally:
+```bash
+npm install
+npm run dev
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+## Lint
+
+```bash
+npm run lint
+```
+
+## Branch Workflow
+
+Use a safe preview workflow for rebrands:
+
+```bash
+git checkout main
+git pull
+git checkout -b foodie-rebrand
+npm run dev
+```
+
+If you do not like the rebrand direction, switch back to main:
+
+```bash
+git checkout main
+```
+
+## Notes
+
+The foodie concept in `foodie-rebrand` is intentionally developer-first.
+It reflects personal identity and creative perspective without changing role focus to chef/recipe content.

@@ -1,37 +1,129 @@
-import { RevealOnScroll } from "../RevealOnScroll";
-
-
 export const Home = () => {
-    return (
-        <section id="home" className="min-h-screen flex items-center justify-center relative">
-            <RevealOnScroll>
-            <div className="text-center z-10 px-4">
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-500 to-purple-400 bg-clip-text text-transparent leading-right">
-                    Hi, I'm Danielle
-                </h1>
+  const orbitItems = [
+    { label: "React · Next.js",   style: { top: "-175px", left: "-75px"  } },
+    { label: "Soul Food",  style: { top: "-85px",  left: "105px"  } },
+    { label: "Tailwind CSS",       style: { top: "80px",   left: "120px"  } },
+    { label: "Street tacos",       style: { top: "148px",  left: "-65px"  } },
+    { label: "GitHub · DevOps",    style: { top: "38px",   left: "-195px" } },
+    { label: "Korean BBQ",         style: { top: "-112px", left: "-170px" } },
+  ];
 
-                <p className="tex-gray-400 text-lg mb-8 max-w-lg mx-auto">
-                I love bringing ideas to life through modern, responsive websites that are both visually appealing and user-friendly. Every project is a new opportunity to learn, grow, and create something impactful. I'm committed to continuously improving my skills and building experiences that make a difference. Check out my work below!
-                </p>
-                <div className="flex justify-center space-x-4">
-                    <a
-                        href="#projects"
-                        className="bg-purple-500 text-white py-3 px-6 rounded font-medium transition relative overflow-hidden hover:-translate-y-0.5 hover:shadow-[hover:shadow-[0_0_15px_rgba(147,51,234,0.4+)]"
-                    >
-                        View Projects
-                    </a>
+  return (
+    <section
+      id="home"
+      className="min-h-screen grid md:grid-cols-2 pt-16"
+      style={{ backgroundColor: "var(--paper)" }}
+    >
+      {/* ── Left: text ── */}
+      <div className="flex flex-col justify-center px-8 md:px-16 py-20">
+        <span className="section-label afu-1">Web Developer</span>
 
-                    <a
-                        href="#contact"
-                        className="border border-purple-500/50 text-purple-500 py-3 px-6 rounded font-medium transition-all duration-200 
-            hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59, 130, 246, 0.2)] hover:bg-purple-500/10"
-                    >
-                        Contact Me
-                    </a>
-                </div>
-            </div>
-            </RevealOnScroll>
-        </section>
+        <h1
+          className="font-playfair afu-2"
+          style={{
+            fontSize: "clamp(3rem, 6vw, 5rem)",
+            lineHeight: 1.05,
+            fontWeight: 700,
+            color: "var(--ink)",
+          }}
+        >
+          I build things.<br />
+          I find joy{" "}
+          <em style={{ fontStyle: "italic", color: "var(--rust)" }}>
+            everywhere.
+          </em>
+        </h1>
 
-    );
+        <p
+          className="afu-3 mt-6 leading-relaxed max-w-md"
+          style={{ fontSize: "1.05rem", color: "var(--light-ink)" }}
+        >
+          <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+            Frontend developer
+          </strong>{" "}
+          specializing in React, Tailwind CSS &amp; responsive design
+          driven by the same curiosity that takes me to new restaurants. Code and cuisine, same philosophy:{" "}
+          <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+            the details make it unforgettable.
+          </strong>
+        </p>
+
+        <div className="afu-4 flex flex-wrap gap-3 mt-8">
+          <a href="#projects" className="btn-filled">View my work</a>
+          <a href="#contact"  className="btn-outline">Let's connect</a>
+        </div>
+      </div>
+
+      {/* ── Right: dark visual ── */}
+      <div
+        className="relative flex items-center justify-center min-h-64 md:min-h-0 overflow-hidden"
+        style={{ backgroundColor: "var(--ink)" }}
+      >
+        {/* dot-grid background */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundSize: "30px 30px",
+          }}
+        />
+
+        {/* orbit ring + items */}
+        <div className="relative" style={{ width: 300, height: 300 }}>
+          <div className="orbit-ring" />
+
+          {/* center text */}
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            style={{ zIndex: 2 }}
+          >
+            <span
+              className="font-mono-dm block mb-3"
+              style={{
+                fontSize: "0.6rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--rust)",
+              }}
+            >
+              My two obsessions
+            </span>
+            <p
+              className="font-playfair"
+              style={{
+                fontSize: "1.15rem",
+                fontStyle: "italic",
+                color: "rgba(248,244,238,0.85)",
+                lineHeight: 1.6,
+              }}
+            >
+              Clean code<br />&amp; bold flavors
+            </p>
+          </div>
+
+          {/* orbit labels */}
+          {orbitItems.map(({ label, style }) => (
+            <span
+              key={label}
+              className="font-mono-dm absolute whitespace-nowrap"
+              style={{
+                fontSize: "0.62rem",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.45)",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%,-50%)",
+                marginTop: style.top,
+                marginLeft: style.left,
+              }}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
