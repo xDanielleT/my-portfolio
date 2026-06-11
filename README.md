@@ -38,23 +38,6 @@ npm run dev
 npm run lint
 ```
 
-## Branch Workflow
-
-Use a safe preview workflow for rebrands:
-
-```bash
-git checkout main
-git pull
-git checkout -b foodie-rebrand
-npm run dev
-```
-
-If you do not like the rebrand direction, switch back to main:
-
-```bash
-git checkout main
-```
-
 ## Notes
 
 The foodie concept in `foodie-rebrand` is intentionally developer-first.
