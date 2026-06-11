@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
-import emailjs from "@emailjs/browser";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-
-emailjs.init(import.meta.env.VITE_PUBLIC_KEY);
 
 export const Contact = () => {
   const formRef = useRef(null);
@@ -14,14 +11,15 @@ export const Contact = () => {
     e.preventDefault();
     setStatus("sending");
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        formRef.current,
-        import.meta.env.VITE_PUBLIC_KEY
-      )
-      .then(() => {
+    // Netlify Forms: POST the encoded fields to the static skeleton path so the
+    // request reaches Netlify's form-handling middleware.
+    fetch("/__forms.html", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(formRef.current)).toString(),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Submission failed");
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
       })
@@ -57,9 +55,21 @@ export const Contact = () => {
         <RevealOnScroll>
           <form
             ref={formRef}
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="space-y-4 text-left"
           >
+            {/* Required by Netlify Forms for AJAX submissions */}
+            <input type="hidden" name="form-name" value="contact" />
+            {/* Honeypot field — hidden from humans, catches bots */}
+            <p className="hidden">
+              <label>
+                Don't fill this out: <input name="bot-field" />
+              </label>
+            </p>
             <input
               type="text"
               name="name"

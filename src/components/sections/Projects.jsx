@@ -30,15 +30,6 @@ const projects = [
   },
   {
     num: "04",
-    title: "AI Image Classifier",
-    flavor: "// teaching machines to taste",
-    desc: "Browser-based image classifier using TensorFlow.js and MobileNet to identify objects from the ImageNet 1000 class list. No server required.",
-    tags: ["HTML", "CSS", "JavaScript", "TensorFlow.js"],
-    github: "https://github.com/xDanielleT/image-classifier",
-    demo: "https://xdaniellet.github.io/image-classifier/",
-  },
-  {
-    num: "05",
     title: "KC People's Fund Website",
     flavor: "// feeding the community",
     desc: "Collaborated to design and build a full nonprofit website using WordPress and Bricks Builder — responsive, accessible, and easy for the client to manage.",
@@ -46,7 +37,7 @@ const projects = [
     demo: "https://kcpeoplesfund.org/",
   },
   {
-    num: "06",
+    num: "05",
     title: "Real-Time Chat App",
     flavor: "// the table where conversation happens",
     desc: "Full-stack chat application with real-time messaging, typing indicators, and chat history. Built with WebSockets and deployed live on Vercel + Render.",
@@ -55,7 +46,7 @@ const projects = [
     demo: "https://chat-app-alpha-virid-53.vercel.app/",
   },
   {
-    num: "07",
+    num: "06",
     title: "Memory Card Game",
     flavor: "// pattern recognition is a skill",
     desc: "A clean memory card matching game built with vanilla HTML, CSS, and JavaScript. Simple premise, satisfying to play.",
@@ -64,12 +55,20 @@ const projects = [
     demo: "https://xdaniellet.github.io/memory-card/",
   },
   {
-    num: "08",
+    num: "07",
     title: "CodePen Collection",
     flavor: "// the tasting menu",
     desc: "A growing collection of front-end experiments — responsive layouts, micro-interactions, and creative CSS. My lab bench for new ideas.",
     tags: ["HTML", "CSS", "JavaScript"],
     demo: "https://codepen.io/10Danii01/live/rNZPqNQ",
+  },
+  {
+    num: "08",
+    title: "Simply Trucking Co.",
+    flavor: "// delivered to the door",
+    desc: "Designed and built a clean, responsive business website for a trucking company using Squarespace — handling layout, branding, and content so the client has a polished presence that's easy to maintain.",
+    tags: ["Squarespace", "Web Design", "Responsive Design"],
+    demo: "https://www.simplytruckingco.com/",
   },
 ];
 
