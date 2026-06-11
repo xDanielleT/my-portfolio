@@ -5,6 +5,7 @@ const skills = [
   "HTML / CSS", "GitHub", "Responsive Design", "Git / Codespaces",
   "REST APIs", "Cloudinary", "Vercel", "WordPress",
   "Node.js", "PHP", "Socket.io", "Figma",
+  "Squarespace",
 ];
 
 export const About = () => {
@@ -103,12 +104,17 @@ export const About = () => {
                 <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Full Stack Web Development Certificate</p>
                 <p className="text-xs mt-0.5" style={{ color: "var(--light-ink)" }}>Johnson County Community College — front-end, back-end, databases, APIs</p>
               </div>
+              <div>
+                <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>In Progress — Expected June 2026</p>
+                <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>SOC Analyst Bootcamp</p>
+                <p className="text-xs mt-0.5" style={{ color: "var(--light-ink)" }}>Security operations, threat detection, and incident response</p>
+              </div>
             </div>
 
             {/* Experience */}
             <span className="section-label">Experience</span>
             <div>
-              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2023 – Present</p>
+              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
               <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Developer — Horton's Tech Innovations</p>
               <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
                 Building responsive web solutions with React, Tailwind, and TypeScript.

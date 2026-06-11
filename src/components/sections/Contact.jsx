@@ -1,31 +1,34 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
-import emailjs from "@emailjs/browser";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-emailjs.init(import.meta.env.VITE_PUBLIC_KEY);
-
 export const Contact = () => {
-  const formRef = useRef(null);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null); // "sending" | "success" | "error"
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        formRef.current,
-        import.meta.env.VITE_PUBLIC_KEY
-      )
-      .then(() => {
+    try {
+      const response = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          ...formData,
+        }).toString(),
+      });
+
+      if (response.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
-      })
-      .catch(() => setStatus("error"));
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -56,10 +59,17 @@ export const Contact = () => {
 
         <RevealOnScroll>
           <form
-            ref={formRef}
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="space-y-4 text-left"
           >
+            <input type="hidden" name="form-name" value="contact" />
+            <p style={{ display: "none" }}>
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
             <input
               type="text"
               name="name"
