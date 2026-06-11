@@ -35,7 +35,7 @@ const projects = [
     desc: "Browser-based image classifier using TensorFlow.js and MobileNet to identify objects from the ImageNet 1000 class list. No server required.",
     tags: ["HTML", "CSS", "JavaScript", "TensorFlow.js"],
     github: "https://github.com/xDanielleT/image-classifier",
-    demo: "https://xdaniellet.github.io/image-classifier/",
+    demo: "/image-classifier.html",
   },
   {
     num: "05",
@@ -70,6 +70,14 @@ const projects = [
     desc: "A growing collection of front-end experiments — responsive layouts, micro-interactions, and creative CSS. My lab bench for new ideas.",
     tags: ["HTML", "CSS", "JavaScript"],
     demo: "https://codepen.io/10Danii01/live/rNZPqNQ",
+  },
+  {
+    num: "09",
+    title: "Simply Trucking Co.",
+    flavor: "// the road, made simple",
+    desc: "Full business website for Simply Trucking Co. — built in Squarespace with a clean, professional layout designed to communicate trust and get clients moving.",
+    tags: ["Squarespace"],
+    demo: "https://www.simplytruckingco.com/",
   },
 ];
 
