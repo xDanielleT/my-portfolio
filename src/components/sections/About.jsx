@@ -4,7 +4,7 @@ const skills = [
   "React", "Next.js", "Tailwind CSS", "JavaScript",
   "HTML / CSS", "GitHub", "Responsive Design", "Git / Codespaces",
   "REST APIs", "Cloudinary", "Vercel", "WordPress",
-  "Node.js", "PHP", "Socket.io", "Figma",
+  "Squarespace", "Node.js", "PHP", "Socket.io", "Figma",
 ];
 
 export const About = () => {
@@ -108,12 +108,31 @@ export const About = () => {
             {/* Experience */}
             <span className="section-label">Experience</span>
             <div>
-              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2023 – Present</p>
+              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
               <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Developer — Horton's Tech Innovations</p>
               <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
                 Building responsive web solutions with React, Tailwind, and TypeScript.
                 Technical mentorship, curriculum review, GitHub workflow management,
                 and client project delivery.
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 my-8">
+              <div className="flex-1 h-px" style={{ backgroundColor: "var(--border)" }} />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--rust)" }} />
+              <div className="flex-1 h-px" style={{ backgroundColor: "var(--border)" }} />
+            </div>
+
+            {/* Next Course — security pivot */}
+            <span className="section-label">Next Course</span>
+            <div>
+              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
+              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Pivoting into Cybersecurity</p>
+              <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
+                Channeling a builder's eye for detail into breaking and defending systems —
+                studying network security, secure coding, threat analysis, and Linux fundamentals.
+                Actively seeking a security-focused role where curiosity is the job description.
               </p>
             </div>
           </RevealOnScroll>
