@@ -31,7 +31,7 @@ export const Taste = () => {
   return (
     <section
       id="taste"
-      className="py-24 px-8 md:px-16"
+      className="py-20 md:py-24 px-6 sm:px-8 md:px-16"
       style={{ backgroundColor: "var(--ink)", color: "var(--paper)" }}
     >
       <div className="max-w-6xl mx-auto">
@@ -45,7 +45,7 @@ export const Taste = () => {
           <h2
             className="font-playfair mb-6"
             style={{
-              fontSize: "clamp(2rem, 4vw, 2.8rem)",
+              fontSize: "clamp(1.9rem, 6vw, 2.8rem)",
               color: "var(--paper)",
               lineHeight: 1.1,
             }}
@@ -54,8 +54,8 @@ export const Taste = () => {
             there's a table.
           </h2>
           <p
-            className="mb-14 leading-relaxed max-w-xl"
-            style={{ fontSize: "0.97rem", color: "rgba(248,244,238,0.6)" }}
+            className="mb-10 md:mb-14 leading-relaxed max-w-xl"
+            style={{ fontSize: "clamp(0.92rem, 3.4vw, 0.97rem)", color: "rgba(248,244,238,0.6)" }}
           >
             I'm a foodie the same way I'm a developer curious, deliberate, always
             chasing the next thing that makes me think{" "}
@@ -106,12 +106,12 @@ export const Taste = () => {
         {/* Quote */}
         <RevealOnScroll>
           <div
-            className="mt-14 p-8 max-w-2xl"
+            className="mt-12 md:mt-14 p-6 sm:p-8 max-w-2xl"
             style={{ border: "1px solid rgba(255,255,255,0.1)" }}
           >
             <p
               className="font-playfair leading-relaxed"
-              style={{ fontStyle: "italic", fontSize: "1.15rem", color: "rgba(248,244,238,0.85)" }}
+              style={{ fontStyle: "italic", fontSize: "clamp(1rem, 3.8vw, 1.15rem)", color: "rgba(248,244,238,0.85)" }}
             >
               "The best developers I know treat their craft the way a chef treats
               a kitchen with total ownership, constant curiosity, and a

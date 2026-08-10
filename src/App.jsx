@@ -14,6 +14,19 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // The custom cursor only makes sense where there is a real cursor to replace.
+  // On touch devices `mousemove` never fires, so the dot and ring would sit
+  // stranded in the top-left corner — skip them (and their rAF loop) entirely.
+  const [hasFinePointer, setHasFinePointer] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setHasFinePointer(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
   // Custom cursor
   const dotRef  = useRef(null);
   const ringRef = useRef(null);
@@ -22,6 +35,8 @@ function App() {
   const raf     = useRef(null);
 
   useEffect(() => {
+    if (!hasFinePointer) return;
+
     const onMove = (e) => {
       mouse.current = { x: e.clientX, y: e.clientY };
       if (dotRef.current) {
@@ -46,13 +61,17 @@ function App() {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf.current);
     };
-  }, []);
+  }, [hasFinePointer]);
 
   return (
     <>
-      {/* Custom cursor */}
-      <div ref={dotRef}  className="cursor-dot"  />
-      <div ref={ringRef} className="cursor-ring" />
+      {/* Custom cursor — pointer devices only */}
+      {hasFinePointer && (
+        <>
+          <div ref={dotRef}  className="cursor-dot"  />
+          <div ref={ringRef} className="cursor-ring" />
+        </>
+      )}
 
       {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
 
@@ -72,17 +91,17 @@ function App() {
 
         {/* Footer */}
         <footer
-          className="flex flex-col md:flex-row justify-between items-center px-8 md:px-16 py-6"
+          className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-8 px-6 sm:px-8 md:px-16 py-8 md:py-6"
           style={{ backgroundColor: "var(--ink)" }}
         >
           <p
-            className="font-mono-dm text-xs tracking-widest uppercase"
+            className="font-mono-dm text-[0.65rem] sm:text-xs tracking-widest uppercase text-center md:text-left"
             style={{ color: "rgba(248,244,238,0.35)" }}
           >
             © 2025 Danielle Turner — Built with intention.
           </p>
           <p
-            className="font-mono-dm text-xs tracking-widest uppercase mt-2 md:mt-0"
+            className="font-mono-dm text-[0.65rem] sm:text-xs tracking-widest uppercase text-center md:text-right"
             style={{ color: "rgba(248,244,238,0.35)" }}
           >
             Inspired by chefs, bakers, and makers who sweat the details.

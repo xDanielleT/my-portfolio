@@ -19,13 +19,14 @@ export const LoadingScreen = ({ onComplete }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center px-6"
       style={{ backgroundColor: "var(--ink)" }}
     >
-      {/* Typing text */}
+      {/* Typing text — scales with the viewport so the 36-character string
+          never overflows a narrow phone screen */}
       <p
-        className="font-mono-dm text-lg md:text-2xl tracking-widest mb-8"
-        style={{ color: "var(--paper)" }}
+        className="font-mono-dm mb-8 text-center tracking-wide sm:tracking-widest"
+        style={{ color: "var(--paper)", fontSize: "clamp(0.75rem, 3.4vw, 1.5rem)" }}
       >
         {text}
         <span className="animate-blink ml-1" style={{ color: "var(--rust)" }}>|</span>
@@ -33,7 +34,7 @@ export const LoadingScreen = ({ onComplete }) => {
 
       {/* Progress bar */}
       <div
-        className="w-48 h-px relative overflow-hidden"
+        className="w-40 sm:w-48 h-px relative overflow-hidden"
         style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
       >
         <div

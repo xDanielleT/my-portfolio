@@ -3,6 +3,7 @@ import { useEffect } from "react";
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
   return (
@@ -13,7 +14,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         borderBottom: "1px solid var(--border)",
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-16">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-16">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <a
@@ -26,9 +27,10 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col gap-1.5 z-40 p-1"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 z-40 -mr-2 h-11 w-11"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Toggle Menu"
+            aria-expanded={menuOpen}
             style={{ cursor: "none" }}
           >
             <span

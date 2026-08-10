@@ -19,7 +19,25 @@ html, body {
   cursor: none;
 }
 
-html { scroll-behavior: smooth; }
+/* Safety net: nothing in the design is meant to scroll sideways */
+body { overflow-x: hidden; }
+
+html {
+  scroll-behavior: smooth;
+  /* Keep anchor jumps clear of the fixed 4rem navbar */
+  scroll-padding-top: 4rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Touch devices have no cursor to replace, so the custom one is just an
+   artifact parked in the top-left corner. Give those users a real cursor
+   back — !important is needed to beat the inline `cursor: none` styles. */
+@media (hover: none), (pointer: coarse) {
+  html, body, a, button, .btn-filled, .btn-outline, .nav-link {
+    cursor: auto !important;
+  }
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
 
 /* Custom cursor */
 .cursor-dot {
@@ -80,15 +98,33 @@ html { scroll-behavior: smooth; }
 .afu-3 { opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
 .afu-4 { opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
 
-/* Orbit ring */
+/* ── Orbit ──
+   The whole orbit scales off one variable so the ring, the label radius and
+   the label type all stay in proportion at every width. Sizing is driven by
+   the *panel's* width (cqw), not the viewport, because the panel is full-bleed
+   on mobile but only half the screen from `md` up — a vw-based size would blow
+   past the panel edge on desktop. The vw line below is the fallback for
+   engines without container query units. */
+.orbit-panel { container-type: inline-size; }
+
+.orbit {
+  position: relative;
+  --orbit-size: clamp(180px, 56vw, 300px);
+  --orbit-size: clamp(180px, 56cqw, 300px);
+  --orbit-gap: clamp(16px, 5vw, 30px);
+  --orbit-gap: clamp(16px, 5cqw, 30px);
+  --orbit-radius: calc(var(--orbit-size) / 2 + var(--orbit-gap));
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+}
+
 @keyframes orbitSpin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 .orbit-ring {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 300px; height: 300px;
+  inset: 0;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.12);
   animation: orbitSpin 20s linear infinite;
@@ -101,6 +137,25 @@ html { scroll-behavior: smooth; }
   background: var(--rust);
   border-radius: 50%;
   transform: translateX(-50%);
+}
+
+/* Labels sit on a circle around the ring. Each one is centred on its own
+   anchor point, then pushed out along its angle by --orbit-radius, so they
+   stay evenly spaced as the orbit grows and shrinks. */
+.orbit-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(0.55rem, 2vw, 0.62rem);
+  font-size: clamp(0.55rem, 2cqw, 0.62rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.45);
+  transform:
+    translate(-50%, -50%)
+    translate(calc(var(--orbit-radius) * var(--x)), calc(var(--orbit-radius) * var(--y)));
 }
 
 /* Buttons */
@@ -232,17 +287,24 @@ html { scroll-behavior: smooth; }
 /* Form inputs */
 .form-input {
   width: 100%;
+  max-width: 100%;
   padding: 0.85rem 1rem;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
+  /* 16px on mobile stops iOS Safari from zooming in on focus */
+  font-size: 1rem;
   background: var(--paper);
   border: 1px solid var(--border);
   color: var(--ink);
   outline: none;
   transition: border-color 0.2s;
 }
+@media (min-width: 640px) {
+  .form-input { font-size: 0.9rem; }
+}
 .form-input:focus { border-color: var(--rust); }
+.form-input:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
 .form-input::placeholder { color: var(--light-ink); opacity: 0.6; }
+.form-input:disabled { opacity: 0.6; }
 
 /* Loading screen */
 @keyframes loadBar {
@@ -256,3 +318,37 @@ html { scroll-behavior: smooth; }
   50%       { opacity: 0; }
 }
 .animate-blink { animation: blink 0.8s step-end infinite; }
+
+/* Comfortable tap targets on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .btn-filled, .btn-outline, .mobile-link, .nav-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Respect a reduced-motion preference: drop the decorative movement but keep
+   everything visible — the reveal-on-scroll elements start at opacity 0, so
+   they must be forced back on rather than simply un-animated. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .orbit-ring,
+  .animate-load-bar,
+  .animate-blink {
+    animation: none;
+  }
+
+  .afu-1, .afu-2, .afu-3, .afu-4 {
+    opacity: 1;
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
