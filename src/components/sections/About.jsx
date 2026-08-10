@@ -11,10 +11,10 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="py-24 px-8 md:px-16"
+      className="py-20 md:py-24 px-6 sm:px-8 md:px-16"
       style={{ backgroundColor: "var(--cream)" }}
     >
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start">
 
         {/* ── Left: bio ── */}
         <div>
@@ -23,7 +23,7 @@ export const About = () => {
             <h2
               className="font-playfair mb-6"
               style={{
-                fontSize: "clamp(2rem, 4vw, 2.8rem)",
+                fontSize: "clamp(1.9rem, 6vw, 2.8rem)",
                 lineHeight: 1.1,
                 color: "var(--ink)",
               }}
@@ -53,7 +53,7 @@ export const About = () => {
 
             {/* Analogy card */}
             <div
-              className="p-5"
+              className="p-5 sm:p-6"
               style={{ borderLeft: "3px solid var(--rust)", backgroundColor: "var(--paper)" }}
             >
               <p

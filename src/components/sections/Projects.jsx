@@ -76,15 +76,15 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-24 px-8 md:px-16"
+      className="py-20 md:py-24 px-6 sm:px-8 md:px-16"
       style={{ backgroundColor: "var(--paper)" }}
     >
       <div className="max-w-6xl mx-auto">
         <RevealOnScroll>
           <span className="section-label">Projects</span>
           <h2
-            className="font-playfair mb-14"
-            style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "var(--ink)", lineHeight: 1.1 }}
+            className="font-playfair mb-10 md:mb-14"
+            style={{ fontSize: "clamp(1.9rem, 6vw, 2.8rem)", color: "var(--ink)", lineHeight: 1.1 }}
           >
             The work on the plate.
           </h2>
@@ -97,7 +97,7 @@ export const Projects = () => {
         >
           {projects.map((p) => (
             <RevealOnScroll key={p.num}>
-              <div className="project-card p-8 h-full flex flex-col">
+              <div className="project-card p-6 sm:p-8 h-full flex flex-col">
                 <p
                   className="font-mono-dm mb-3"
                   style={{ fontSize: "0.62rem", letterSpacing: "0.15em", color: "var(--rust)" }}
@@ -146,7 +146,7 @@ export const Projects = () => {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-x-4 gap-y-2">
                   {p.github && (
                     <a
                       href={p.github}

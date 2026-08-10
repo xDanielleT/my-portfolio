@@ -1,30 +1,36 @@
-export const Home = () => {
-  const orbitItems = [
-    { label: "React · Next.js",   style: { top: "-175px", left: "-75px"  } },
-    { label: "Soul Food",  style: { top: "-85px",  left: "105px"  } },
-    { label: "Tailwind CSS",       style: { top: "80px",   left: "120px"  } },
-    { label: "Street tacos",       style: { top: "148px",  left: "-65px"  } },
-    { label: "GitHub · DevOps",    style: { top: "38px",   left: "-195px" } },
-    { label: "Korean BBQ",         style: { top: "-112px", left: "-170px" } },
-  ];
+// Labels are placed by angle rather than by hard-coded pixel offsets, so they
+// stay evenly spaced on the ring at every screen size. 0deg points right and
+// angles run clockwise (y grows downward, as in CSS).
+const orbitItems = [
+  { label: "React · Next.js", angle: 270 },
+  { label: "Soul Food", angle: 330 },
+  { label: "Tailwind CSS", angle: 30 },
+  { label: "Street tacos", angle: 90 },
+  { label: "GitHub · DevOps", angle: 150 },
+  { label: "Korean BBQ", angle: 210 },
+];
 
+const round = (n) => String(Math.round(n * 10000) / 10000);
+
+export const Home = () => {
   return (
     <section
       id="home"
-      className="min-h-screen grid md:grid-cols-2 pt-16"
+      className="min-h-svh md:min-h-screen grid md:grid-cols-2 pt-16"
       style={{ backgroundColor: "var(--paper)" }}
     >
       {/* ── Left: text ── */}
-      <div className="flex flex-col justify-center px-8 md:px-16 py-20">
+      <div className="flex flex-col justify-center items-center text-center md:items-start md:text-left px-6 sm:px-8 md:px-16 py-16 md:py-20">
         <span className="section-label afu-1">Web Developer</span>
 
         <h1
           className="font-playfair afu-2"
           style={{
-            fontSize: "clamp(3rem, 6vw, 5rem)",
+            fontSize: "clamp(2.25rem, 8.5vw, 5rem)",
             lineHeight: 1.05,
             fontWeight: 700,
             color: "var(--ink)",
+            textWrap: "balance",
           }}
         >
           I build things.<br />
@@ -36,7 +42,7 @@ export const Home = () => {
 
         <p
           className="afu-3 mt-6 leading-relaxed max-w-md"
-          style={{ fontSize: "1.05rem", color: "var(--light-ink)" }}
+          style={{ fontSize: "clamp(0.95rem, 3.6vw, 1.05rem)", color: "var(--light-ink)" }}
         >
           <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
             Frontend developer
@@ -48,7 +54,7 @@ export const Home = () => {
           </strong>
         </p>
 
-        <div className="afu-4 flex flex-wrap gap-3 mt-8">
+        <div className="afu-4 flex flex-wrap justify-center md:justify-start gap-3 mt-8">
           <a href="#projects" className="btn-filled">View my work</a>
           <a href="#contact"  className="btn-outline">Let's connect</a>
         </div>
@@ -56,7 +62,7 @@ export const Home = () => {
 
       {/* ── Right: dark visual ── */}
       <div
-        className="relative flex items-center justify-center min-h-64 md:min-h-0 overflow-hidden"
+        className="orbit-panel relative flex items-center justify-center overflow-hidden min-h-[20rem] md:min-h-0 py-14 md:py-0"
         style={{ backgroundColor: "var(--ink)" }}
       >
         {/* dot-grid background */}
@@ -70,12 +76,12 @@ export const Home = () => {
         />
 
         {/* orbit ring + items */}
-        <div className="relative" style={{ width: 300, height: 300 }}>
+        <div className="orbit">
           <div className="orbit-ring" />
 
           {/* center text */}
           <div
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6"
             style={{ zIndex: 2 }}
           >
             <span
@@ -92,7 +98,7 @@ export const Home = () => {
             <p
               className="font-playfair"
               style={{
-                fontSize: "1.15rem",
+                fontSize: "clamp(1rem, 3.5vw, 1.15rem)",
                 fontStyle: "italic",
                 color: "rgba(248,244,238,0.85)",
                 lineHeight: 1.6,
@@ -103,25 +109,21 @@ export const Home = () => {
           </div>
 
           {/* orbit labels */}
-          {orbitItems.map(({ label, style }) => (
-            <span
-              key={label}
-              className="font-mono-dm absolute whitespace-nowrap"
-              style={{
-                fontSize: "0.62rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.45)",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%,-50%)",
-                marginTop: style.top,
-                marginLeft: style.left,
-              }}
-            >
-              {label}
-            </span>
-          ))}
+          {orbitItems.map(({ label, angle }) => {
+            const radians = (angle * Math.PI) / 180;
+            return (
+              <span
+                key={label}
+                className="orbit-label"
+                style={{
+                  "--x": round(Math.cos(radians)),
+                  "--y": round(Math.sin(radians)),
+                }}
+              >
+                {label}
+              </span>
+            );
+          })}
         </div>
       </div>
     </section>

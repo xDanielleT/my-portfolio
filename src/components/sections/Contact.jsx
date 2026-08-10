@@ -7,29 +7,37 @@ export const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState(null); // "sending" | "success" | "error"
 
-  const handleSubmit = (e) => {
+  const isSending = status === "sending";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSending) return;
     setStatus("sending");
 
     // Netlify Forms: POST the encoded fields to the static skeleton path so the
-    // request reaches Netlify's form-handling middleware.
-    fetch("/__forms.html", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(new FormData(formRef.current)).toString(),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Submission failed");
-        setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-      })
-      .catch(() => setStatus("error"));
+    // request reaches Netlify's form-handling middleware. Posting to "/" would
+    // be served the SPA shell and silently never reach form processing.
+    try {
+      const res = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(new FormData(formRef.current)).toString(),
+      });
+
+      if (!res.ok) throw new Error(`Submission failed with status ${res.status}`);
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("Contact form submission failed:", err);
+      setStatus("error");
+    }
   };
 
   return (
     <section
       id="contact"
-      className="py-24 px-8 md:px-16"
+      className="py-20 md:py-24 px-6 sm:px-8 md:px-16"
       style={{ backgroundColor: "var(--cream)" }}
     >
       <div className="max-w-2xl mx-auto text-center">
@@ -39,13 +47,13 @@ export const Contact = () => {
           </span>
           <h2
             className="font-playfair mb-4"
-            style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "var(--ink)", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(1.9rem, 6vw, 2.8rem)", color: "var(--ink)", lineHeight: 1.1 }}
           >
             Let's build something<br />worth talking about.
           </h2>
           <p
             className="mb-10 leading-relaxed"
-            style={{ fontSize: "0.97rem", color: "var(--light-ink)" }}
+            style={{ fontSize: "clamp(0.92rem, 3.4vw, 0.97rem)", color: "var(--light-ink)" }}
           >
             Whether it's a new project, a collaboration, or just a conversation
             about the best hidden-gem restaurant in KC — my inbox is open.
@@ -57,6 +65,7 @@ export const Contact = () => {
             ref={formRef}
             name="contact"
             method="POST"
+            action="/__forms.html"
             data-netlify="true"
             netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
@@ -67,32 +76,46 @@ export const Contact = () => {
             {/* Honeypot field — hidden from humans, catches bots */}
             <p className="hidden">
               <label>
-                Don't fill this out: <input name="bot-field" />
+                Don't fill this out: <input name="bot-field" tabIndex={-1} />
               </label>
             </p>
+
+            <label className="sr-only" htmlFor="contact-name">Your name</label>
             <input
+              id="contact-name"
               type="text"
               name="name"
               placeholder="Your name"
               required
+              autoComplete="name"
+              disabled={isSending}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="form-input"
             />
+
+            <label className="sr-only" htmlFor="contact-email">Your email</label>
             <input
+              id="contact-email"
               type="email"
               name="email"
               placeholder="your@email.com"
               required
+              autoComplete="email"
+              disabled={isSending}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="form-input"
             />
+
+            <label className="sr-only" htmlFor="contact-message">Your message</label>
             <textarea
+              id="contact-message"
               name="message"
               placeholder="Tell me about your project..."
               required
               rows={5}
+              disabled={isSending}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               className="form-input resize-none"
@@ -100,29 +123,32 @@ export const Contact = () => {
 
             <button
               type="submit"
-              disabled={status === "sending"}
+              disabled={isSending}
               className="btn-filled w-full text-center"
-              style={{ opacity: status === "sending" ? 0.7 : 1 }}
+              style={{ opacity: isSending ? 0.7 : 1 }}
             >
-              {status === "sending" ? "Sending..." : "Send Message"}
+              {isSending ? "Sending..." : "Send Message"}
             </button>
 
-            {status === "success" && (
-              <p
-                className="font-mono-dm text-center text-xs tracking-wider mt-2"
-                style={{ color: "#5a7a5e" }}
-              >
-                Message sent! I'll be in touch soon.
-              </p>
-            )}
-            {status === "error" && (
-              <p
-                className="font-mono-dm text-center text-xs tracking-wider mt-2"
-                style={{ color: "var(--rust)" }}
-              >
-                Something went wrong. Please try again.
-              </p>
-            )}
+            {/* aria-live so screen readers announce the result */}
+            <div aria-live="polite">
+              {status === "success" && (
+                <p
+                  className="font-mono-dm text-center text-xs tracking-wider mt-2"
+                  style={{ color: "#5a7a5e" }}
+                >
+                  Message sent! I'll be in touch soon.
+                </p>
+              )}
+              {status === "error" && (
+                <p
+                  className="font-mono-dm text-center text-xs tracking-wider mt-2"
+                  style={{ color: "var(--rust)" }}
+                >
+                  Something went wrong. Please try again, or email me directly.
+                </p>
+              )}
+            </div>
           </form>
 
           {/* Social links */}
