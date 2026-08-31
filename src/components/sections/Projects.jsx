@@ -70,6 +70,14 @@ const projects = [
     tags: ["Squarespace", "Web Design", "Responsive Design"],
     demo: "https://www.simplytruckingco.com/",
   },
+  {
+    num: "09",
+    title: "Power Angle Photography",
+    flavor: "// presentation is everything",
+    desc: "Designed and built a responsive site for a Denver senior-portrait photographer using Showit on WordPress — custom layouts, a booking flow, FAQs, and a resources blog, all shaped so the photography leads and clients can book without friction.",
+    tags: ["Showit", "WordPress", "Web Design", "Responsive Design"],
+    demo: "https://poweranglephotos.com/",
+  },
 ];
 
 export const Projects = () => {

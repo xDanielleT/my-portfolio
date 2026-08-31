@@ -111,9 +111,10 @@ export const About = () => {
               <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
               <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Developer — Horton's Tech Innovations</p>
               <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
-                Building responsive web solutions with React, Tailwind, and TypeScript.
-                Technical mentorship, curriculum review, GitHub workflow management,
-                and client project delivery.
+                Develop responsive web solutions using React, Tailwind CSS, and TypeScript.
+                Provide technical support to students, assist instructors with coursework,
+                manage collaborative GitHub workflows, and contribute to client web
+                development projects.
               </p>
             </div>
 
