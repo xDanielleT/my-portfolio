@@ -1,11 +1,14 @@
 export const Home = () => {
+  // All six labels sit on the ring itself: each is placed at radius 150 (the
+  // ring's radius) at its own angle. The orbit stage scales these offsets down
+  // on narrow screens via --orbit-scale so nothing gets clipped.
   const orbitItems = [
-    { label: "React · Next.js",   style: { top: "-175px", left: "-75px"  } },
-    { label: "Soul Food",  style: { top: "-85px",  left: "105px"  } },
-    { label: "Tailwind CSS",       style: { top: "80px",   left: "120px"  } },
-    { label: "Street tacos",       style: { top: "148px",  left: "-65px"  } },
-    { label: "GitHub · DevOps",    style: { top: "38px",   left: "-195px" } },
-    { label: "Korean BBQ",         style: { top: "-112px", left: "-170px" } },
+    { label: "React · Next.js",  x: -59,  y: -138 },
+    { label: "Soul Food",        x: 117,  y: -94  },
+    { label: "Tailwind CSS",     x: 125,  y: 83   },
+    { label: "Street tacos",     x: -60,  y: 137  },
+    { label: "GitHub · DevOps",  x: -132, y: 70   },
+    { label: "Korean BBQ",       x: -125, y: -83  },
   ];
 
   return (
@@ -56,7 +59,7 @@ export const Home = () => {
 
       {/* ── Right: dark visual ── */}
       <div
-        className="relative flex items-center justify-center min-h-64 md:min-h-0 overflow-hidden"
+        className="relative flex items-center justify-center min-h-[360px] md:min-h-0 overflow-hidden"
         style={{ backgroundColor: "var(--ink)" }}
       >
         {/* dot-grid background */}
@@ -70,32 +73,29 @@ export const Home = () => {
         />
 
         {/* orbit ring + items */}
-        <div className="relative" style={{ width: 300, height: 300 }}>
+        <div className="orbit-stage">
           <div className="orbit-ring" />
 
           {/* center text */}
           <div
-            className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
+            className="orbit-center absolute inset-0 flex flex-col items-center justify-center text-center"
             style={{ zIndex: 2 }}
           >
             <span
-              className="font-mono-dm block mb-3"
+              className="orbit-eyebrow font-mono-dm block"
               style={{
-                fontSize: "0.6rem",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
                 color: "var(--rust)",
               }}
             >
-              My two obsessions
+              Things I enjoy
             </span>
             <p
-              className="font-playfair"
+              className="orbit-title font-playfair"
               style={{
-                fontSize: "1.15rem",
                 fontStyle: "italic",
                 color: "rgba(248,244,238,0.85)",
-                lineHeight: 1.6,
               }}
             >
               Clean code<br />&amp; bold flavors
@@ -103,20 +103,19 @@ export const Home = () => {
           </div>
 
           {/* orbit labels */}
-          {orbitItems.map(({ label, style }) => (
+          {orbitItems.map(({ label, x, y }) => (
             <span
               key={label}
-              className="font-mono-dm absolute whitespace-nowrap"
+              className="orbit-label font-mono-dm absolute whitespace-nowrap"
               style={{
-                fontSize: "0.62rem",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 color: "rgba(255,255,255,0.45)",
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%,-50%)",
-                marginTop: style.top,
-                marginLeft: style.left,
+                marginTop: `calc(${y}px * var(--orbit-scale))`,
+                marginLeft: `calc(${x}px * var(--orbit-scale))`,
               }}
             >
               {label}
