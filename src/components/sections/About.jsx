@@ -125,15 +125,15 @@ export const About = () => {
               <div className="flex-1 h-px" style={{ backgroundColor: "var(--border)" }} />
             </div>
 
-            {/* Next Course — security pivot */}
+            {/* Next Course — security expansion */}
             <span className="section-label">Next Course</span>
             <div>
-              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
-              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Pivoting into Cybersecurity</p>
+              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2026</p>
+              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Expanded into Cybersecurity</p>
               <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
-                Channeling a builder's eye for detail into breaking and defending systems —
-                studying network security, secure coding, threat analysis, and Linux fundamentals.
-                Actively seeking a security-focused role where curiosity is the job description.
+                Began formal cybersecurity training and hands-on practice with SIEM tools,
+                threat detection, network analysis, and security concepts while continuing
+                to build on my web development background.
               </p>
             </div>
           </RevealOnScroll>
