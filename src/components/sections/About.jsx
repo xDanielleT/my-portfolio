@@ -106,7 +106,7 @@ export const About = () => {
             </div>
 
             {/* Experience */}
-            <span className="section-label">Experience</span>
+            {/* <span className="section-label">Experience</span>
             <div>
               <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
               <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Developer — Horton's Tech Innovations</p>
@@ -116,7 +116,7 @@ export const About = () => {
                 manage collaborative GitHub workflows, and contribute to client web
                 development projects.
               </p>
-            </div>
+            </div> */}
 
             {/* Divider */}
             <div className="flex items-center gap-3 my-8">
@@ -128,8 +128,8 @@ export const About = () => {
             {/* Next Course — security pivot */}
             <span className="section-label">Next Course</span>
             <div>
-              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2025 – Present</p>
-              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Pivoting into Cybersecurity</p>
+              <p className="font-mono-dm text-xs tracking-wider mb-1" style={{ color: "var(--rust)" }}>2026</p>
+              <p className="font-semibold text-sm" style={{ color: "var(--ink)" }}>Expanding into Cybersecurity</p>
               <p className="text-xs mt-1 leading-relaxed" style={{ color: "var(--light-ink)" }}>
                 Channeling a builder's eye for detail into breaking and defending systems —
                 studying network security, secure coding, threat analysis, and Linux fundamentals.

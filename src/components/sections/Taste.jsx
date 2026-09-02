@@ -2,8 +2,8 @@ import { RevealOnScroll } from "../RevealOnScroll";
 
 const foods = [
   {
-    icon: "🫙",
-    type: "Current obsession",
+    icon: "❤️",
+    type: "Comfort Classic",
     name: "Soul Food",
     note: "The communal nature of it. Everything designed to be shared, torn apart, and rebuilt. Great UX principle, honestly.",
   },
@@ -20,7 +20,7 @@ const foods = [
     note: "Interactive, collaborative, and you're building something in real time. Sounds like good pair programming to me.",
   },
   {
-    icon: "🫕",
+    icon: "🌍",
     type: "Exploring next",
     name: "West African Cuisine",
     note: "Jollof rice is a whole debate. I'm doing the research. Thoroughly. Multiple sources required.",
