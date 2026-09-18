@@ -85,7 +85,7 @@ function App() {
             className="font-mono-dm text-xs tracking-widest uppercase mt-2 md:mt-0"
             style={{ color: "rgba(248,244,238,0.35)" }}
           >
-            Inspired by chefs, bakers, and makers who sweat the details.
+            Because the details matter.
           </p>
         </footer>
       </div>

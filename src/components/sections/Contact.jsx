@@ -48,7 +48,7 @@ export const Contact = () => {
             style={{ fontSize: "0.97rem", color: "var(--light-ink)" }}
           >
             Whether it's a new project, a collaboration, or just a conversation
-            about the best hidden-gem restaurant in KC — my inbox is open.
+            about the best hidden-gem restaurant in KC my inbox is open.
           </p>
         </RevealOnScroll>
 

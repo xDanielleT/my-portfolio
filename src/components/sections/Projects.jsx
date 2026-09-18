@@ -74,9 +74,17 @@ const projects = [
     num: "09",
     title: "Power Angle Photography",
     flavor: "// presentation is everything",
-    desc: "Designed and built a responsive site for a Denver senior-portrait photographer using Showit on WordPress — custom layouts, a booking flow, FAQs, and a resources blog, all shaped so the photography leads and clients can book without friction.",
+    desc: "Designed and built a responsive photography website in Showit — creating custom layouts, a streamlined booking experience, FAQs, and an integrated WordPress resources blog to showcase the photographer’s work and make it easy for clients to connect.",
     tags: ["Showit", "WordPress", "Web Design", "Responsive Design"],
     demo: "https://poweranglephotos.com/",
+  },
+  {
+    num: "10",
+    title: "Airtime Basketball",
+    flavor: "// same ingredients, better arrangement",
+    desc: "Redesigned and restructured an existing Shopify site for a basketball organization — rebuilding navigation, creating and customizing page templates and sections, improving responsive layouts, and combining Shopify’s theme editor with Liquid, CSS, and JavaScript customization.",
+    tags: ["Shopify", "Liquid", "JavaScript", "HTML", "CSS"],
+    demo: "https://www.airtimebasketball.com/",
   },
 ];
 
@@ -90,46 +98,81 @@ export const Projects = () => {
       <div className="max-w-6xl mx-auto">
         <RevealOnScroll>
           <span className="section-label">Projects</span>
+
           <h2
             className="font-playfair mb-14"
-            style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "var(--ink)", lineHeight: 1.1 }}
+            style={{
+              fontSize: "clamp(2rem, 4vw, 2.8rem)",
+              color: "var(--ink)",
+              lineHeight: 1.1,
+            }}
           >
             The work on the plate.
           </h2>
         </RevealOnScroll>
 
-        {/* Grid — separated by 1px border lines */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          style={{ gap: "1px", backgroundColor: "var(--border)" }}
-        >
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p) => (
             <RevealOnScroll key={p.num}>
-              <div className="project-card p-8 h-full flex flex-col">
+              <div
+                className="
+                  project-card
+                  p-8
+                  h-full
+                  flex
+                  flex-col
+                "
+                style={{
+                  borderRight: "1px solid var(--border)",
+                  borderBottom: "1px solid var(--border)",
+                  backgroundColor: "var(--paper)",
+                }}
+              >
+                {/* Project Number */}
                 <p
                   className="font-mono-dm mb-3"
-                  style={{ fontSize: "0.62rem", letterSpacing: "0.15em", color: "var(--rust)" }}
+                  style={{
+                    fontSize: "0.62rem",
+                    letterSpacing: "0.15em",
+                    color: "var(--rust)",
+                  }}
                 >
                   {p.num} —
                 </p>
 
+                {/* Project Title */}
                 <h3
                   className="font-playfair mb-1"
-                  style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--ink)" }}
+                  style={{
+                    fontSize: "1.25rem",
+                    fontWeight: 700,
+                    color: "var(--ink)",
+                  }}
                 >
                   {p.title}
                 </h3>
 
+                {/* Flavor Text */}
                 <p
                   className="font-mono-dm mb-4"
-                  style={{ fontSize: "0.65rem", letterSpacing: "0.08em", color: "var(--rust)", fontStyle: "italic" }}
+                  style={{
+                    fontSize: "0.65rem",
+                    letterSpacing: "0.08em",
+                    color: "var(--rust)",
+                    fontStyle: "italic",
+                  }}
                 >
                   {p.flavor}
                 </p>
 
+                {/* Description */}
                 <p
                   className="leading-relaxed mb-5 flex-1"
-                  style={{ fontSize: "0.88rem", color: "var(--light-ink)" }}
+                  style={{
+                    fontSize: "0.88rem",
+                    color: "var(--light-ink)",
+                  }}
                 >
                   {p.desc}
                 </p>
@@ -161,20 +204,35 @@ export const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1.5 font-mono-dm"
-                      style={{ fontSize: "0.65rem", letterSpacing: "0.08em", color: "var(--rust)", cursor: "none", textDecoration: "none" }}
+                      style={{
+                        fontSize: "0.65rem",
+                        letterSpacing: "0.08em",
+                        color: "var(--rust)",
+                        cursor: "none",
+                        textDecoration: "none",
+                      }}
                     >
-                      <FaGithub /> GitHub →
+                      <FaGithub />
+                      GitHub →
                     </a>
                   )}
+
                   {p.demo && (
                     <a
                       href={p.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-1.5 font-mono-dm"
-                      style={{ fontSize: "0.65rem", letterSpacing: "0.08em", color: "var(--rust)", cursor: "none", textDecoration: "none" }}
+                      style={{
+                        fontSize: "0.65rem",
+                        letterSpacing: "0.08em",
+                        color: "var(--rust)",
+                        cursor: "none",
+                        textDecoration: "none",
+                      }}
                     >
-                      <FiExternalLink /> Live Demo →
+                      <FiExternalLink />
+                      Live Demo →
                     </a>
                   )}
                 </div>

@@ -23,13 +23,20 @@ export const LoadingScreen = ({ onComplete }) => {
       style={{ backgroundColor: "var(--ink)" }}
     >
       {/* Typing text */}
-      <p
-        className="font-mono-dm text-lg md:text-2xl tracking-widest mb-8"
-        style={{ color: "var(--paper)" }}
-      >
-        {text}
-        <span className="animate-blink ml-1" style={{ color: "var(--rust)" }}>|</span>
-      </p>
+      <div className="w-full max-w-2xl px-6 mb-8">
+  <p
+    className="font-mono-dm text-base sm:text-lg md:text-2xl tracking-widest text-center"
+    style={{ color: "var(--paper)" }}
+  >
+    {text}
+    <span
+      className="animate-blink ml-1"
+      style={{ color: "var(--rust)" }}
+    >
+      |
+    </span>
+  </p>
+</div>
 
       {/* Progress bar */}
       <div
