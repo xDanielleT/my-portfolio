@@ -1,11 +1,26 @@
 import { useRef, useState } from "react";
+import { FaGithub, FaLinkedin, FaCodepen } from "react-icons/fa";
+import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { RevealOnScroll } from "../RevealOnScroll";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { links } from "../../data/content";
+
+const subjects = ["Project inquiry", "Collaboration", "Job opportunity", "Just saying hello"];
+
+const contactItems = [
+  { icon: <FiMapPin />, label: "Kansas City, MO" },
+  { icon: <FaLinkedin />, label: "linkedin.com/in/danielle-turner680-", href: links.linkedin },
+  { icon: <FaGithub />, label: "github.com/xDanielleT", href: links.github },
+  { icon: <FaCodepen />, label: "codepen.io/10Danii01", href: links.codepen },
+];
+
+const emptyForm = { name: "", email: "", subject: "", message: "" };
 
 export const Contact = () => {
   const formRef = useRef(null);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState(emptyForm);
   const [status, setStatus] = useState(null); // "sending" | "success" | "error"
+
+  const update = (field) => (e) => setFormData({ ...formData, [field]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,35 +36,36 @@ export const Contact = () => {
       .then((res) => {
         if (!res.ok) throw new Error("Submission failed");
         setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData(emptyForm);
       })
       .catch(() => setStatus("error"));
   };
 
   return (
-    <section
-      id="contact"
-      className="py-24 px-8 md:px-16"
-      style={{ backgroundColor: "var(--cream)" }}
-    >
-      <div className="max-w-2xl mx-auto text-center">
+    <section id="contact" className="sheet py-14 lg:py-16">
+      <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
         <RevealOnScroll>
-          <span className="section-label" style={{ display: "block", textAlign: "center" }}>
-            Contact
-          </span>
-          <h2
-            className="font-playfair mb-4"
-            style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "var(--ink)", lineHeight: 1.1 }}
-          >
-            Let's build something<br />worth talking about.
-          </h2>
-          <p
-            className="mb-10 leading-relaxed"
-            style={{ fontSize: "0.97rem", color: "var(--light-ink)" }}
-          >
-            Whether it's a new project, a collaboration, or just a conversation
-            about the best hidden-gem restaurant in KC my inbox is open.
+          <p className="eyebrow mb-3">Let's Connect</p>
+          <h2 className="section-title">Get in Touch</h2>
+          <p className="mt-4 leading-relaxed text-[var(--muted)] max-w-sm">
+            Have a project, opportunity, or just want to connect? I'd love to
+            hear from you.
           </p>
+
+          <ul className="contact-list mt-8 space-y-4">
+            {contactItems.map(({ icon, label, href }) => (
+              <li key={label} className="flex items-center gap-4 text-[0.95rem]">
+                <span className="contact-icon">{icon}</span>
+                {href ? (
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-[var(--ink)] hover:text-[var(--primary)] break-all">
+                    {label}
+                  </a>
+                ) : (
+                  <span>{label}</span>
+                )}
+              </li>
+            ))}
+          </ul>
         </RevealOnScroll>
 
         <RevealOnScroll>
@@ -60,7 +76,7 @@ export const Contact = () => {
             data-netlify="true"
             netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
-            className="space-y-4 text-left"
+            className="glass p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 gap-3"
           >
             {/* Required by Netlify Forms for AJAX submissions */}
             <input type="hidden" name="form-name" value="contact" />
@@ -70,84 +86,43 @@ export const Contact = () => {
                 Don't fill this out: <input name="bot-field" />
               </label>
             </p>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="form-input"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="your@email.com"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="form-input"
-            />
+
+            <label className="sr-only" htmlFor="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Name *" required value={formData.name} onChange={update("name")} className="field" />
+
+            <label className="sr-only" htmlFor="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Email *" required value={formData.email} onChange={update("email")} className="field" />
+
+            <label className="sr-only" htmlFor="subject">Subject</label>
+            <select id="subject" name="subject" required value={formData.subject} onChange={update("subject")} className="field sm:col-span-2">
+              <option value="" disabled>Subject *</option>
+              {subjects.map((s) => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+
+            <label className="sr-only" htmlFor="message">Message</label>
             <textarea
+              id="message"
               name="message"
-              placeholder="Tell me about your project..."
+              placeholder="Your message * — tell me about your project, opportunity, or just say hello..."
               required
-              rows={5}
+              rows={4}
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="form-input resize-none"
+              onChange={update("message")}
+              className="field sm:col-span-2 resize-y"
             />
 
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="btn-filled w-full text-center"
-              style={{ opacity: status === "sending" ? 0.7 : 1 }}
-            >
-              {status === "sending" ? "Sending..." : "Send Message"}
-            </button>
-
-            {status === "success" && (
-              <p
-                className="font-mono-dm text-center text-xs tracking-wider mt-2"
-                style={{ color: "#5a7a5e" }}
-              >
-                Message sent! I'll be in touch soon.
+            <div className="sm:col-span-2 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3">
+              <p className="text-sm" role="status">
+                {status === "success" && <span className="text-emerald-700">Message sent! I'll be in touch soon.</span>}
+                {status === "error" && <span className="text-red-600">Something went wrong. Please try again.</span>}
               </p>
-            )}
-            {status === "error" && (
-              <p
-                className="font-mono-dm text-center text-xs tracking-wider mt-2"
-                style={{ color: "var(--rust)" }}
-              >
-                Something went wrong. Please try again.
-              </p>
-            )}
+              <button type="submit" disabled={status === "sending"} className="btn btn-primary justify-center disabled:opacity-70">
+                {status === "sending" ? "Sending..." : "Send Message"} <FiArrowRight />
+              </button>
+            </div>
           </form>
-
-          {/* Social links */}
-          <div className="flex justify-center gap-6 mt-10">
-            <a
-              href="https://github.com/xDanielleT"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--light-ink)", fontSize: "1.5rem", cursor: "none", transition: "color 0.2s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--rust)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--light-ink)")}
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/danielle-turner680-/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--light-ink)", fontSize: "1.5rem", cursor: "none", transition: "color 0.2s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--rust)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--light-ink)")}
-            >
-              <FaLinkedin />
-            </a>
-          </div>
         </RevealOnScroll>
       </div>
     </section>

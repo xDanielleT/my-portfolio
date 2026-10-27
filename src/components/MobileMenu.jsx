@@ -1,25 +1,27 @@
-export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
-  const links = ["home", "about", "projects", "taste", "contact"];
+import { navItems } from "../data/content";
 
+export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
   return (
     <div
-      className={`fixed inset-0 z-30 flex flex-col items-center justify-center transition-all duration-300
+      className={`fixed inset-0 z-30 flex flex-col items-center justify-center bg-white/95 backdrop-blur-lg transition-all duration-300 lg:hidden
         ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-      style={{ backgroundColor: "rgba(26,23,20,0.97)" }}
     >
-      {links.map((item, i) => (
+      {navItems.map(({ label, href }, i) => (
         <a
-          key={item}
-          href={`#${item}`}
+          key={href}
+          href={href}
           onClick={() => setMenuOpen(false)}
-          className={`mobile-link my-5 transition-all duration-300 ${
+          className={`font-display text-3xl font-semibold text-[var(--navy)] my-3 transition-all duration-300 ${
             menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
-          style={{ transitionDelay: `${i * 60}ms` }}
+          style={{ transitionDelay: `${i * 50}ms` }}
         >
-          {item}
+          {label}
         </a>
       ))}
+      <a href="#contact" onClick={() => setMenuOpen(false)} className="btn btn-primary mt-6">
+        Let's Connect
+      </a>
     </div>
   );
 };
