@@ -179,32 +179,66 @@ h1, h2, h3, .font-display { font-family: "Outfit", "Inter", sans-serif; }
 }
 
 /* ---------- Hero visual ---------- */
+/* A laptop whose screen is pulled apart into the layers of a website */
 .hero-stage {
   position: relative;
-  height: 420px;
-  perspective: 1400px;
+  height: 440px;
+  perspective: 1500px;
 }
-.pane {
+.stack {
   position: absolute;
-  border-radius: 12px;
-  background: linear-gradient(160deg, #1d1b4b, #2d2a7a 60%, #4338ca);
-  border: 1px solid rgba(165, 180, 252, 0.4);
-  box-shadow: 0 30px 50px -20px rgba(49, 46, 129, 0.55);
-  overflow: hidden;
-  transform: rotateY(-24deg) rotateX(6deg);
+  left: 22%;
+  top: 44%;
+  width: 300px;
+  height: 188px;
+  transform-style: preserve-3d;
+  transform: rotateX(8deg) rotateY(-34deg) rotateZ(1deg);
 }
-.pane::before {
-  content: "";
+.layer,
+.laptop-screen {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(rgba(255,255,255,0.12) 0 0) 12px 28px / 40% 6px no-repeat,
-    linear-gradient(rgba(255,255,255,0.08) 0 0) 12px 44px / 70% 6px no-repeat,
-    linear-gradient(rgba(255,255,255,0.08) 0 0) 12px 58px / 55% 6px no-repeat,
-    linear-gradient(rgba(129,140,248,0.35) 0 0) 12px 80px / 30% 34px no-repeat,
-    linear-gradient(rgba(56,189,248,0.25) 0 0) 46% 80px / 30% 34px no-repeat,
-    linear-gradient(rgba(255,255,255,0.08) 0 0) 12px 130px / 80% 6px no-repeat;
+  border-radius: 10px;
+  overflow: hidden;
 }
+.layer {
+  --gap: 80px;
+  background: linear-gradient(150deg, rgba(49, 46, 129, 0.88), rgba(67, 56, 202, 0.72) 55%, rgba(14, 165, 233, 0.55));
+  border: 1px solid rgba(165, 180, 252, 0.75);
+  box-shadow:
+    0 0 24px rgba(129, 140, 248, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  transform: translate3d(0, calc(var(--depth) * -30px), calc(var(--depth) * var(--gap) * -1));
+  animation: explode 1.4s cubic-bezier(.2, .8, .2, 1) both;
+}
+/* Between the stacked and wide layouts the column is narrow, so shrink the scene */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .stack {
+    left: 12%;
+    transform: rotateX(8deg) rotateY(-34deg) rotateZ(1deg) scale(0.8);
+  }
+}
+@keyframes explode {
+  from { transform: translate3d(0, 0, 0); opacity: 0; }
+}
+.connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+.connectors path {
+  fill: none;
+  stroke: #22d3ee;
+  stroke-width: 1.5;
+  opacity: 0.85;
+}
+.connectors circle { fill: #22d3ee; }
+.chip { z-index: 2; }
+
 .pane-dots {
   position: absolute;
   top: 9px;
@@ -218,28 +252,30 @@ h1, h2, h3, .font-display { font-family: "Outfit", "Inter", sans-serif; }
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.45);
 }
-
-.laptop {
-  position: absolute;
-  left: 26%;
-  bottom: 18px;
-  width: 52%;
-  transform: rotateY(-14deg) rotateX(4deg);
-  filter: drop-shadow(0 30px 30px rgba(30, 27, 75, 0.35));
-}
 .laptop-screen {
-  border: 10px solid #111322;
-  border-bottom-width: 14px;
-  border-radius: 14px 14px 4px 4px;
   background: #fff;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
+  border: 9px solid #111322;
+  border-radius: 12px 12px 3px 3px;
+  box-shadow: 0 20px 40px -10px rgba(30, 27, 75, 0.45);
 }
-.laptop-base {
-  height: 12px;
-  margin: 0 -8%;
-  border-radius: 0 0 14px 14px;
-  background: linear-gradient(#d4d7e6, #9ca0b8);
+.laptop-deck {
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  top: 100%;
+  height: 200px;
+  border-radius: 4px 4px 16px 16px;
+  background: linear-gradient(#e7e9f3, #b9bdd2);
+  box-shadow: 0 30px 40px -10px rgba(30, 27, 75, 0.45);
+  transform-origin: top;
+  transform: rotateX(72deg);
+}
+.laptop-deck::before {
+  content: "";
+  position: absolute;
+  inset: 12% 10% 40%;
+  border-radius: 6px;
+  background: repeating-linear-gradient(90deg, #cfd2e2 0 14px, #e3e5f0 14px 17px);
 }
 
 .chip {
@@ -476,5 +512,5 @@ h1, h2, h3, .font-display { font-family: "Outfit", "Inter", sans-serif; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .chip { animation: none; }
+  .chip, .layer { animation: none; }
 }

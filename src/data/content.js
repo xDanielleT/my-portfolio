@@ -16,8 +16,9 @@ export const navItems = [
   { label: "Contact", href: "#contact" },
 ];
 
-// Filters shown above the project row. Only categories that have projects.
-export const projectFilters = ["All", "Websites", "Web Apps", "Creative"];
+// Filters shown above the project row. Client websites are live sites built for
+// real organizations; personal projects are apps and experiments I made myself.
+export const projectFilters = ["All", "Client Websites", "Personal Projects"];
 
 // To show a screenshot, drop an image in public/images/projects/ and set
 // `image: "images/projects/your-file.png"` on the project.
@@ -26,7 +27,7 @@ export const projects = [
     title: "WeCode KC Services Page",
     short: "WeCode KC",
     type: "Community · Education",
-    category: "Websites",
+    category: "Client Websites",
     desc: "Collaborated on a professional services page for WeCode KC — dynamic, responsive, and built with a user experience that earns a second visit.",
     tags: ["React", "Tailwind CSS", "HTML"],
     demo: "https://www.wecodekc.org/services",
@@ -36,7 +37,7 @@ export const projects = [
     title: "Simply Trucking Co.",
     short: "Simply Trucking",
     type: "Business Website",
-    category: "Websites",
+    category: "Client Websites",
     desc: "Designed and built a clean, responsive business website for a trucking company using Squarespace — handling layout, branding, and content so the client has a polished presence that's easy to maintain.",
     tags: ["Squarespace", "Web Design", "Responsive Design"],
     demo: "https://www.simplytruckingco.com/",
@@ -46,7 +47,7 @@ export const projects = [
     title: "Power Angle Photography",
     short: "Power Angle Photos",
     type: "Photography Website",
-    category: "Websites",
+    category: "Client Websites",
     desc: "Designed and built a responsive photography website in Showit — creating custom layouts, a streamlined booking experience, FAQs, and an integrated WordPress resources blog to showcase the photographer’s work and make it easy for clients to connect.",
     tags: ["Showit", "WordPress", "Web Design", "Responsive Design"],
     demo: "https://poweranglephotos.com/",
@@ -56,7 +57,7 @@ export const projects = [
     title: "Airtime Basketball",
     short: "Airtime Basketball",
     type: "Shopify Redesign",
-    category: "Websites",
+    category: "Client Websites",
     desc: "Redesigned and restructured an existing Shopify site for a basketball organization — rebuilding navigation, creating and customizing page templates and sections, improving responsive layouts, and combining Shopify’s theme editor with Liquid, CSS, and JavaScript customization.",
     tags: ["Shopify", "Liquid", "JavaScript", "HTML", "CSS"],
     demo: "https://www.airtimebasketball.com/",
@@ -66,7 +67,7 @@ export const projects = [
     title: "KC People's Fund Website",
     short: "KC People's Fund",
     type: "Nonprofit Website",
-    category: "Websites",
+    category: "Client Websites",
     desc: "Collaborated to design and build a full nonprofit website using WordPress and Bricks Builder — responsive, accessible, and easy for the client to manage.",
     tags: ["WordPress", "Bricks Builder", "CSS", "JavaScript"],
     demo: "https://kcpeoplesfund.org/",
@@ -75,8 +76,8 @@ export const projects = [
   {
     title: "Real-Time Chat App",
     short: "Real-Time Chat",
-    type: "Full-Stack Web App",
-    category: "Web Apps",
+    type: "Personal · Web App",
+    category: "Personal Projects",
     desc: "Full-stack chat application with real-time messaging, typing indicators, and chat history. Built with WebSockets and deployed live on Vercel + Render.",
     tags: ["React", "Vite", "Node.js", "Socket.io", "Vercel"],
     github: "https://github.com/xDanielleT/chat-app",
@@ -84,20 +85,10 @@ export const projects = [
     accent: ["#6366f1", "#ec4899"],
   },
   {
-    title: "PHP Todo List",
-    short: "PHP Todo List",
-    type: "Web App",
-    category: "Web Apps",
-    desc: "PHP-based task manager using session storage — add, complete, and delete tasks without a database. Minimal, functional, no fuss.",
-    tags: ["PHP", "HTML", "CSS"],
-    github: "https://github.com/xDanielleT/PHP-Todo-List",
-    accent: ["#8b5cf6", "#14b8a6"],
-  },
-  {
     title: "jQuery Font Sampler",
     short: "Font Sampler",
-    type: "Web App",
-    category: "Web Apps",
+    type: "Personal · Web App",
+    category: "Personal Projects",
     desc: "Responsive web app letting users sample custom fonts with their own text, adjustable size, and color. Clean interface built to let the typography speak for itself.",
     tags: ["HTML", "jQuery"],
     github: "https://github.com/xDanielleT/font-sampler",
@@ -107,8 +98,8 @@ export const projects = [
   {
     title: "Memory Card Game",
     short: "Memory Card Game",
-    type: "Browser Game",
-    category: "Creative",
+    type: "Personal · Browser Game",
+    category: "Personal Projects",
     desc: "A clean memory card matching game built with vanilla HTML, CSS, and JavaScript. Simple premise, satisfying to play.",
     tags: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/xDanielleT/memory-card?tab=readme-ov-file",
@@ -118,8 +109,8 @@ export const projects = [
   {
     title: "CodePen Collection",
     short: "CodePen Collection",
-    type: "Front-End Experiments",
-    category: "Creative",
+    type: "Personal · Experiments",
+    category: "Personal Projects",
     desc: "A growing collection of front-end experiments — responsive layouts, micro-interactions, and creative CSS. My lab bench for new ideas.",
     tags: ["HTML", "CSS", "JavaScript"],
     demo: "https://codepen.io/10Danii01/live/rNZPqNQ",

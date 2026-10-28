@@ -100,12 +100,12 @@ export const Projects = () => {
     <section id="projects" className="sheet py-14 lg:py-16">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-10">
         <RevealOnScroll>
-          <p className="eyebrow mb-3">Real Websites · Real Impact</p>
+          <p className="eyebrow mb-3">Client Work · Personal Projects</p>
           <h2 className="section-title">The Living Archive</h2>
           <p className="mt-5 leading-relaxed text-[var(--muted)]">
-            A collection of real websites, creative projects, and technical work.
-            Click a project to see the website, my contributions, and the
-            technologies used.
+            Client websites built for real organizations, plus personal projects
+            I made to learn and experiment. Click a project to see what I did
+            and the technologies used.
           </p>
           <button className="btn btn-primary mt-7" onClick={() => changeFilter("All")}>
             Explore All Projects <FiArrowRight />
