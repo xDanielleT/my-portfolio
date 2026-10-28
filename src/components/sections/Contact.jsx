@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaCodepen } from "react-icons/fa";
-import { FiArrowRight, FiMapPin } from "react-icons/fi";
+import { FiArrowRight, FiGlobe } from "react-icons/fi";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { links } from "../../data/content";
 
 const subjects = ["Project inquiry", "Collaboration", "Job opportunity", "Just saying hello"];
 
 const contactItems = [
-  { icon: <FiMapPin />, label: "Kansas City, MO" },
+  { icon: <FiGlobe />, label: "Remote" },
   { icon: <FaLinkedin />, label: "linkedin.com/in/danielle-turner680-", href: links.linkedin },
   { icon: <FaGithub />, label: "github.com/xDanielleT", href: links.github },
   { icon: <FaCodepen />, label: "codepen.io/10Danii01", href: links.codepen },
