@@ -1261,3 +1261,12 @@ h3,
 @media (max-width: 420px) {
   .project-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
 }
+/* Phones: a smaller chat bubble tucked closer to the corner, so it covers less of the page */
+@media (max-width: 767px) {
+  .chat-root {
+    right: calc(14px + env(safe-area-inset-right, 0px));
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  .chat-launcher { width: 52px; height: 52px; box-shadow: 0 0 0 2px var(--primary), 0 10px 22px -8px rgba(39, 34, 120, 0.5); }
+  .chat-status { width: 11px; height: 11px; right: 1px; bottom: 1px; }
+}

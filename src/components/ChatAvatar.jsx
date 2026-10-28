@@ -95,6 +95,8 @@ export const ChatAvatar = () => {
 
   // Wave hello once, a few seconds after the page loads
   useEffect(() => {
+        // Only on larger screens: on phones the bubble covers too much of the page
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
     const t = setTimeout(() => setShowHint(true), 8000);
     return () => clearTimeout(t);
   }, []);

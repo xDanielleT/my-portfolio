@@ -49,7 +49,12 @@ export const Playground = () => {
     // Mouse can grab anywhere on a note; touch only from the move handle so
     // the page still scrolls normally on phones.
     const fromHandle = e.target.closest(".pg-handle");
-    if (e.pointerType !== "mouse" && !fromHandle) return;
+    if (e.pointerType !== "mouse" && !fromHandle) {
+      // A tap on a note brings it to the front, so a covered note's handle
+      // is always one tap away
+      setStack((prev) => [...prev.filter((n) => n !== i), i]);
+      return;
+    }
     if (!fromHandle && e.target.closest("a, button, summary, input")) return;
 
     e.preventDefault();
@@ -70,7 +75,12 @@ export const Playground = () => {
     document.body.style.userSelect = "none";
     setDragging(i);
     setStack((prev) => [...prev.filter((n) => n !== i), i]);
-    e.currentTarget.setPointerCapture?.(e.pointerId);
+    // Keep receiving moves even if the finger slides off the note
+    try {
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    } catch {
+      // Some browsers refuse capture; dragging still works without it
+    }
   };
 
   const onMove = (e) => {
@@ -90,10 +100,13 @@ export const Playground = () => {
   };
 
   const shuffle = () => {
+    // On phones the notes sit in one column, so only re-tilt them in place
+    // instead of sliding them on top of each other
+    const phone = window.matchMedia("(max-width: 639px)").matches;
     setOffsets(tilts.map(() => ({
-      x: Math.round((Math.random() - 0.5) * 60),
-      y: Math.round((Math.random() - 0.5) * 40),
-      r: Math.round((Math.random() - 0.5) * 8),
+      x: phone ? 0 : Math.round((Math.random() - 0.5) * 60),
+      y: phone ? 0 : Math.round((Math.random() - 0.5) * 40),
+      r: Math.round((Math.random() - 0.5) * (phone ? 6 : 8)),
     })));
   };
 

@@ -132,77 +132,73 @@ const HeroVisual = () => {
   const paths = useConnectors(stageRef, chipRefs, layerRefs);
 
   return (
-  <div className="hero-stage" ref={stageRef} aria-hidden="true">
-    <svg className="connectors">
-      {paths.map((p) => (
-        <g key={p.key}>
-          <path d={p.d} />
-          <circle cx={p.x2} cy={p.y2} r="3.5" />
-        </g>
-      ))}
-    </svg>
+    <div className="hero-stage" ref={stageRef} aria-hidden="true">
+      <svg className="connectors">
+        {paths.map((p) => (
+          <g key={p.key}>
+            <path d={p.d} />
+            <circle cx={p.x2} cy={p.y2} r="3.5" />
+          </g>
+        ))}
+      </svg>
 
-    <div className="stack">
-      {layers.map((layer, i) => (
+      <div className="stack">
+        {layers.map((layer, i) => (
+          <div
+            key={layer.key}
+            ref={(el) => (layerRefs.current[layer.key] = el)}
+            className="layer"
+            style={{ "--depth": layers.length - i, animationDelay: `${0.15 * i}s` }}
+          >
+            <div className="pane-dots"><i /><i /><i /></div>
+            {layer.body}
+          </div>
+        ))}
+
+        {/* Front layer: a real site I built, scrolling on the laptop screen */}
+        <div className="laptop-screen" ref={(el) => (layerRefs.current.screen = el)}>
+          <img className="screen-site" src="images/projects/hero-screen.webp" alt="" decoding="async" />
+        </div>
+        <div className="laptop-deck" />
+      </div>
+
+      {chips.map((c) => (
         <div
-          key={layer.key}
-          ref={(el) => (layerRefs.current[layer.key] = el)}
-          className="layer"
-          style={{ "--depth": layers.length - i, animationDelay: `${0.15 * i}s` }}
+          key={c.label}
+          ref={(el) => (chipRefs.current[c.layer] = el)}
+          className="chip"
+          style={{ ...c.style, animationDelay: c.delay }}
         >
-          <div className="pane-dots"><i /><i /><i /></div>
-          {layer.body}
+          {c.icon}
+          {c.label}
         </div>
       ))}
-
-      {/* Front layer: a real site I built, scrolling on the laptop screen */}
-      <div className="laptop-screen" ref={(el) => (layerRefs.current.screen = el)}>
-        <img className="screen-site" src="images/projects/hero-screen.webp" alt="" decoding="async" />
-      </div>
-      <div className="laptop-deck" />
     </div>
-
-    {chips.map((c) => (
-      <div
-        key={c.label}
-        ref={(el) => (chipRefs.current[c.layer] = el)}
-        className="chip"
-        style={{ ...c.style, animationDelay: c.delay }}
-      >
-        {c.icon}
-        {c.label}
-      </div>
-    ))}
-  </div>
   );
 };
 
 export const Home = () => {
   return (
-    <section id="home" className="pt-28 pb-14 lg:pt-32 lg:pb-16 overflow-hidden">
+    <section id="home" className="pt-28 pb-8 sm:pb-14 lg:pt-32 lg:pb-16 overflow-hidden">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 items-center">
         <div>
-          <p className="eyebrow mb-5">Danielle Turner · Frontend Developer</p>
-          {/* <p className="eyebrow mb-5">Web Developer · Creative · Problem-Solver</p> */}
+          <p className="eyebrow mb-3 sm:mb-5 tracking-[0.18em] sm:tracking-[0.32em]">Danielle Turner / Web Developer &amp; Creative Builder</p>
 
-          <h1 className="font-semibold tracking-tight text-[var(--navy)] leading-[1.02] text-[clamp(2.6rem,6vw,4.1rem)]">
-            Modern Websites
+          <h1 className="font-semibold tracking-tight text-[var(--navy)] leading-[1.04] text-[clamp(2.3rem,6vw,4.1rem)]">
+            The code was just
             <br />
-            <span className="gradient-text">Real Solutions.</span>
+            <span className="gradient-text">the beginning.</span>
           </h1>
 
-          <p className="mt-6 max-w-[480px] text-[1.08rem] leading-relaxed text-[var(--muted)]">
-            I build modern, responsive websites, solve technical problems, and
-            explore new technologies with a passion for creating accessible and
-            engaging experiences.
+          <p className="mt-4 sm:mt-6 max-w-[480px] text-[1.02rem] sm:text-[1.08rem] leading-relaxed text-[var(--muted)]">
+            What started with building websites grew into something bigger: a
+            curiosity for what technology can do and the creativity to explore
+            it. Every project is another opportunity to put both to work.
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="mt-6 sm:mt-8">
             <a href="#projects" className="btn btn-primary">
               Explore My Work <FiArrowRight />
-            </a>
-            <a href="#playground" className="btn btn-outline">
-              See How I Build
             </a>
           </div>
         </div>
