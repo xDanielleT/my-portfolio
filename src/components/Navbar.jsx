@@ -15,11 +15,16 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 10);
-      let current = "#home";
+      // A section becomes "current" once its top passes the upper third of the screen
+      let current = navItems[0].href;
       for (const { href } of navItems) {
         const el = document.querySelector(href);
-        if (el && el.getBoundingClientRect().top < 140) current = href;
+        if (el && el.getBoundingClientRect().top < window.innerHeight * 0.35) current = href;
       }
+      // At the very bottom of the page the last section is current, even if it's
+      // too short for its top to reach that point
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) current = navItems[navItems.length - 1].href;
       setActive(current);
     };
     onScroll();
@@ -29,9 +34,8 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
   return (
     <nav
-      className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
-        scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : ""
-      }`}
+      className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : ""
+        }`}
     >
       <div className="container-x flex items-center justify-between h-20">
         <Logo />

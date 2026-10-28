@@ -155,31 +155,9 @@ const HeroVisual = () => {
         </div>
       ))}
 
-      {/* Front layer: the finished page on the laptop */}
+      {/* Front layer: a real site I built, scrolling on the laptop screen */}
       <div className="laptop-screen" ref={(el) => (layerRefs.current.screen = el)}>
-        <div className="h-full flex flex-col">
-          <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-100">
-            <span className="w-8 h-2 rounded bg-indigo-500" />
-            <span className="ml-auto w-6 h-1.5 rounded bg-slate-200" />
-            <span className="w-6 h-1.5 rounded bg-slate-200" />
-            <span className="w-6 h-1.5 rounded bg-slate-200" />
-          </div>
-          <div className="flex-1 grid grid-cols-2 gap-3 p-3">
-            <div className="flex flex-col gap-1.5 justify-center">
-              <span className="w-4/5 h-2.5 rounded bg-slate-800" />
-              <span className="w-3/5 h-2.5 rounded bg-violet-600" />
-              <span className="w-full h-1.5 rounded bg-slate-200 mt-1" />
-              <span className="w-5/6 h-1.5 rounded bg-slate-200" />
-              <span className="w-10 h-3 rounded-full bg-indigo-500 mt-1.5" />
-            </div>
-            <div className="rounded-md bg-gradient-to-br from-indigo-400 via-violet-400 to-sky-300" />
-            <div className="col-span-2 grid grid-cols-3 gap-2">
-              <span className="h-5 rounded bg-indigo-100" />
-              <span className="h-5 rounded bg-violet-100" />
-              <span className="h-5 rounded bg-sky-100" />
-            </div>
-          </div>
-        </div>
+        <img className="screen-site" src="images/projects/hero-screen.webp" alt="" decoding="async" />
       </div>
       <div className="laptop-deck" />
     </div>
@@ -204,7 +182,8 @@ export const Home = () => {
     <section id="home" className="pt-28 pb-14 lg:pt-32 lg:pb-16 overflow-hidden">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 items-center">
         <div>
-          <p className="eyebrow mb-5">Web Developer · Creative · Problem-Solver</p>
+          <p className="eyebrow mb-5">Danielle Turner · Frontend Developer</p>
+          {/* <p className="eyebrow mb-5">Web Developer · Creative · Problem-Solver</p> */}
 
           <h1 className="font-semibold tracking-tight text-[var(--navy)] leading-[1.02] text-[clamp(2.6rem,6vw,4.1rem)]">
             Modern Websites

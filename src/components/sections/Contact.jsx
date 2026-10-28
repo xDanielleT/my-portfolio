@@ -4,7 +4,13 @@ import { FiArrowRight, FiGlobe } from "react-icons/fi";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { links } from "../../data/content";
 
-const subjects = ["Project inquiry", "Collaboration", "Job opportunity", "Just saying hello"];
+// Subject choices. The value is what you receive in Netlify; the label is what visitors see.
+const subjects = [
+  { value: "Project inquiry", label: "Project" },
+  { value: "Collaboration", label: "Collaboration" },
+  { value: "Job opportunity", label: "Job opportunity" },
+  { value: "Just saying hello", label: "Just saying hi" },
+];
 
 const contactItems = [
   { icon: <FiGlobe />, label: "Remote" },
@@ -45,7 +51,7 @@ export const Contact = () => {
     <section id="contact" className="sheet py-14 lg:py-16">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
         <RevealOnScroll>
-          <p className="eyebrow mb-3">Let's Connect</p>
+          <p className="eyebrow mb-3">Would love to hear from you!</p>
           <h2 className="section-title">Get in Touch</h2>
           <p className="mt-4 leading-relaxed text-[var(--muted)] max-w-sm">
             Have a project, opportunity, or just want to connect? I'd love to
@@ -69,60 +75,81 @@ export const Contact = () => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <form
-            ref={formRef}
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            onSubmit={handleSubmit}
-            className="glass p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 gap-3"
-          >
-            {/* Required by Netlify Forms for AJAX submissions */}
-            <input type="hidden" name="form-name" value="contact" />
-            {/* Honeypot field — hidden from humans, catches bots */}
-            <p className="hidden">
-              <label>
-                Don't fill this out: <input name="bot-field" />
-              </label>
-            </p>
-
-            <label className="sr-only" htmlFor="name">Name</label>
-            <input id="name" type="text" name="name" placeholder="Name *" required value={formData.name} onChange={update("name")} className="field" />
-
-            <label className="sr-only" htmlFor="email">Email</label>
-            <input id="email" type="email" name="email" placeholder="Email *" required value={formData.email} onChange={update("email")} className="field" />
-
-            <label className="sr-only" htmlFor="subject">Subject</label>
-            <select id="subject" name="subject" required value={formData.subject} onChange={update("subject")} className="field sm:col-span-2">
-              <option value="" disabled>Subject *</option>
-              {subjects.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
-
-            <label className="sr-only" htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Your message * — tell me about your project, opportunity, or just say hello..."
-              required
-              rows={4}
-              value={formData.message}
-              onChange={update("message")}
-              className="field sm:col-span-2 resize-y"
-            />
-
-            <div className="sm:col-span-2 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3">
-              <p className="text-sm" role="status">
-                {status === "success" && <span className="text-emerald-700">Message sent! I'll be in touch soon.</span>}
-                {status === "error" && <span className="text-red-600">Something went wrong. Please try again.</span>}
-              </p>
-              <button type="submit" disabled={status === "sending"} className="btn btn-primary justify-center disabled:opacity-70">
-                {status === "sending" ? "Sending..." : "Send Message"} <FiArrowRight />
-              </button>
+          {/* The form is styled like a "New Message" window on a computer */}
+          <div className="mail-window">
+            <div className="mail-titlebar" aria-hidden="true">
+              <span className="mail-dot" style={{ background: "#ff5f57" }} />
+              <span className="mail-dot" style={{ background: "#febc2e" }} />
+              <span className="mail-dot" style={{ background: "#28c840" }} />
+              <span className="mail-title">New Message — DaniBytes</span>
             </div>
-          </form>
+
+            <form
+              ref={formRef}
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              className="mail-body"
+              aria-label="Send me a message"
+            >
+              {/* Required by Netlify Forms for AJAX submissions */}
+              <input type="hidden" name="form-name" value="contact" />
+              {/* Honeypot field — hidden from humans, catches bots */}
+              <p className="hidden">
+                <label>
+                  Don't fill this out: <input name="bot-field" />
+                </label>
+              </p>
+
+              <div className="mail-row">
+                <span className="mail-label">To</span>
+                <span className="mail-to">
+                  <span className="mail-to-logo" aria-hidden="true"><span>//</span>D</span>
+                  Danielle Turner
+                </span>
+              </div>
+
+              <div className="mail-row">
+                <label className="mail-label" htmlFor="name">From</label>
+                <input id="name" type="text" name="name" placeholder="Your name" required maxLength={100} autoComplete="name" value={formData.name} onChange={update("name")} className="mail-input" />
+              </div>
+
+              <div className="mail-row">
+                <label className="mail-label" htmlFor="email">Reply to</label>
+                <input id="email" type="email" name="email" placeholder="you@example.com" required maxLength={254} autoComplete="email" value={formData.email} onChange={update("email")} className="mail-input" />
+              </div>
+
+              <div className="mail-row" role="radiogroup" aria-labelledby="subject-label" aria-required="true">
+                <span id="subject-label" className="mail-label">Subject</span>
+                <div className="mail-chips">
+                  {subjects.map((s) => (
+                    <label key={s.value} className="mail-chip">
+                      <input type="radio" name="subject" value={s.value} required checked={formData.subject === s.value} onChange={update("subject")} />
+                      <span>{s.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mail-message">
+                <label className="mail-label" htmlFor="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell me about your project, opportunity, or just say hello…" required maxLength={5000} rows={5} value={formData.message} onChange={update("message")} className="mail-input mail-textarea" />
+              </div>
+
+              <div className="mail-footer">
+                <p className="mail-status" role="status">
+                  {status === "success" && <span className="text-emerald-700">Message sent! Thanks for reaching out.</span>}
+                  {status === "error" && <span className="text-red-700">Something went wrong. Please try again, or reach me on LinkedIn.</span>}
+                  {!status && <span>All fields are required.</span>}
+                </p>
+                <button type="submit" disabled={status === "sending"} className="btn btn-primary justify-center disabled:opacity-70">
+                  {status === "sending" ? "Sending..." : "Send Message"} <FiArrowRight />
+                </button>
+              </div>
+            </form>
+          </div>
         </RevealOnScroll>
       </div>
     </section>
