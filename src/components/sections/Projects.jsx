@@ -83,6 +83,9 @@ const ProjectModal = ({ project, onClose }) => {
 export const Projects = () => {
   const [filter, setFilter] = useState("All");
   const [selected, setSelected] = useState(null);
+  // "row" scrolls sideways; "grid" lays every project out at once
+  const [view, setView] = useState("row");
+  const [scrollState, setScrollState] = useState({ start: true, end: false });
   const rowRef = useRef(null);
 
   const visible = filter === "All" ? projects : projects.filter((p) => p.category === filter);
@@ -96,6 +99,23 @@ export const Projects = () => {
     rowRef.current?.scrollTo({ left: 0 });
   };
 
+  // Track whether the row is at its start or end, to fade the arrows and the edge hint
+  const updateScrollState = () => {
+    const row = rowRef.current;
+    if (!row) return;
+    setScrollState({
+      start: row.scrollLeft <= 4,
+      end: row.scrollLeft + row.clientWidth >= row.scrollWidth - 4,
+    });
+  };
+
+  useEffect(updateScrollState, [filter, view]);
+
+  const toggleView = () => {
+    setView((v) => (v === "row" ? "grid" : "row"));
+    if (view === "row") setFilter("All");
+  };
+
   return (
     <section id="projects" className="sheet py-14 lg:py-16">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-10">
@@ -107,8 +127,8 @@ export const Projects = () => {
             I made to learn and experiment. Click a project to see what I did
             and the technologies used.
           </p>
-          <button className="btn btn-primary mt-7" onClick={() => changeFilter("All")}>
-            Explore All Projects <FiArrowRight />
+          <button className="btn btn-primary mt-7" onClick={toggleView} aria-expanded={view === "grid"} aria-controls="project-list">
+            {view === "row" ? "Explore All Projects" : "Back to Carousel"} <FiArrowRight />
           </button>
         </RevealOnScroll>
 
@@ -126,17 +146,30 @@ export const Projects = () => {
                 </button>
               ))}
             </div>
-            <div className="hidden sm:flex gap-2">
-              <button className="circle-btn" onClick={() => scroll(-1)} aria-label="Previous projects">
-                <FiArrowLeft />
-              </button>
-              <button className="circle-btn" onClick={() => scroll(1)} aria-label="Next projects">
-                <FiArrowRight />
-              </button>
-            </div>
+            {view === "row" && (
+              <div className="flex gap-2 shrink-0">
+                <button className="circle-btn" onClick={() => scroll(-1)} disabled={scrollState.start} aria-label="Previous projects">
+                  <FiArrowLeft />
+                </button>
+                <button className="circle-btn" onClick={() => scroll(1)} disabled={scrollState.end} aria-label="Next projects">
+                  <FiArrowRight />
+                </button>
+              </div>
+            )}
           </div>
 
-          <div className="project-row" ref={rowRef}>
+          {view === "row" && (
+            <p className="swipe-hint" aria-hidden="true">
+              {visible.length} projects · swipe or use the arrows to see more →
+            </p>
+          )}
+
+          <div
+            id="project-list"
+            className={`${view === "row" ? "project-row" : "project-grid"} ${view === "row" && !scrollState.end ? "has-more" : ""}`}
+            ref={rowRef}
+            onScroll={updateScrollState}
+          >
             {visible.map((p) => (
               <button key={p.title} className="project-card" onClick={() => setSelected(p)}>
                 <Thumb project={p} />

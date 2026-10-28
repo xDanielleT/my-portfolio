@@ -1244,3 +1244,20 @@ h3,
   /* Fit the chat window to the visible screen, even with the keyboard open */
   .chat-panel { height: min(560px, calc(100vh - 120px)); height: min(560px, calc(100dvh - 120px)); }
 }
+
+/* Projects: "more to see" hint, fading edge, and the all-projects grid view */
+.swipe-hint { margin: -4px 0 6px; font-size: 0.8rem; color: var(--soft); }
+.project-row.has-more {
+  -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+  mask-image: linear-gradient(to right, #000 85%, transparent);
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 0.5rem 0.25rem 1.25rem;
+}
+.project-grid .project-card { flex: none; }
+@media (max-width: 420px) {
+  .project-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+}
