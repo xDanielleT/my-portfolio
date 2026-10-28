@@ -1092,12 +1092,6 @@ h3,
    Shuffle / Tidy up buttons can never be covered */
 .corkboard .note-heading { z-index: 35; }
 
-/* Thin brand-green line along the bottom of the navbar, just above the hero */
-nav.fixed {
-  border-bottom: 4px solid var(--primary);
-}
-
-
 /* Thin brand-green line just above the hero. It sits right under the
    navbar at the top of the page and scrolls away with the hero. */
 #home { position: relative; }
@@ -1241,4 +1235,12 @@ nav.fixed {
   .mail-row { grid-template-columns: 70px 1fr; }
   .mail-footer .btn { width: 100%; }
   .mail-chip span { min-height: 44px; }
+}
+
+/* iPhones zoom the whole page when you tap a text field smaller than 16px.
+   Keep every typing field at 16px on phones so that never happens. */
+@media (max-width: 767px) {
+  input, textarea, select, .chat-input input, .mail-input { font-size: 16px; }
+  /* Fit the chat window to the visible screen, even with the keyboard open */
+  .chat-panel { height: min(560px, calc(100vh - 120px)); height: min(560px, calc(100dvh - 120px)); }
 }
