@@ -158,4 +158,4 @@ export const education = [
 ];
 
 export const about =
-  "I'm a frontend developer specializing in React, Tailwind CSS, and responsive design. I thrive in collaborative workflows and love building things that are precise, accessible, and — when it counts — beautiful.";
+  "I'm a frontend developer specializing in React, Tailwind CSS, and responsive design. I thrive in collaborative workflows and love building things that are precise, when it counts, beautiful.";

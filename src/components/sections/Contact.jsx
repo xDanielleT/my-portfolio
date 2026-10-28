@@ -81,7 +81,7 @@ export const Contact = () => {
               <span className="mail-dot" style={{ background: "#ff5f57" }} />
               <span className="mail-dot" style={{ background: "#febc2e" }} />
               <span className="mail-dot" style={{ background: "#28c840" }} />
-              <span className="mail-title">New Message — DaniBytes</span>
+              <span className="mail-title">New Message · DaniBytes</span>
             </div>
 
             <form
