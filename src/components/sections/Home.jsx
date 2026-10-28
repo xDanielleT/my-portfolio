@@ -1,699 +1,214 @@
-export const Home = () => {
-  const nodes = [
-    {
-      label: "React",
-      type: "tech",
-      x: 50,
-      y: 8,
-    },
-    {
-      label: "Soul Food",
-      type: "food",
-      x: 78,
-      y: 23,
-    },
-    {
-      label: "Continuous Learning",
-      type: "curiosity",
-      x: 88,
-      y: 52,
-    },
-    {
-      label: "GitHub",
-      type: "tech",
-      x: 67,
-      y: 82,
-    },
-    {
-      label: "Korean BBQ",
-      type: "food",
-      x: 32,
-      y: 86,
-    },
-    {
-      label: "Next.js",
-      type: "tech",
-      x: 10,
-      y: 64,
-    },
-    {
-      label: "Street Tacos",
-      type: "food",
-      x: 13,
-      y: 32,
-    },
-  ];
+import { useEffect, useRef, useState } from "react";
+import { FiArrowRight, FiBox, FiMonitor, FiSettings } from "react-icons/fi";
+import { IoColorPaletteOutline } from "react-icons/io5";
+import { PiCursorFill } from "react-icons/pi";
 
-  // Main connections around the constellation
-  const mainConnections = [
-    [0, 1],
-    [1, 2],
-    [2, 3],
-    [3, 4],
-    [4, 5],
-    [5, 6],
-    [6, 0],
-  ];
+// The hero shows a laptop whose screen "explodes" backwards into the layers
+// that make up a website. Each floating label points at its layer.
+const layers = [
+  { key: "functionality", body: <LayerCode /> },
+  { key: "components", body: <LayerCards /> },
+  { key: "design", body: <LayerDesign /> },
+  { key: "navigation", body: <LayerNav /> },
+  { key: "responsive", body: <LayerGrid /> },
+];
 
-  // Secondary connections across the constellation
-  const crossConnections = [
-    [0, 3],
-    [1, 5],
-    [3, 6],
-  ];
+// `anchor` says which side of the label the connector leaves from; `at` is the
+// point on the layer it lands on, as fractions of the layer's width/height.
+const chips = [
+  { label: "Design", layer: "design", anchor: "left", at: [0.3, 0.02], icon: <IoColorPaletteOutline />, style: { top: "6%", left: "2%" }, delay: "0s" },
+  { label: "Navigation", layer: "navigation", anchor: "left", at: [0.2, 0.04], icon: <PiCursorFill />, style: { top: "34%", left: "0%" }, delay: "1.2s" },
+  { label: "Responsive", layer: "screen", anchor: "left", at: [0.02, 0.5], icon: <FiMonitor />, style: { top: "76%", left: "0%" }, delay: "2.4s" },
+  { label: "Components", layer: "components", anchor: "above", at: [0.8, 0.02], icon: <FiBox />, style: { top: "4%", right: "0%" }, delay: "0.6s" },
+  { label: "Functionality", layer: "functionality", anchor: "below", at: [0.98, 0.55], icon: <FiSettings />, style: { top: "78%", right: "0%" }, delay: "1.8s" },
+];
 
-  const getNodeColor = (type) => {
-    if (type === "food") {
-      return "var(--gold)";
-    }
+// Measures where each label and its layer ended up on screen, then returns a
+// curved connector path between them.
+const useConnectors = (stageRef, chipRefs, layerRefs) => {
+  const [paths, setPaths] = useState([]);
 
-    return "var(--rust)";
-  };
+  useEffect(() => {
+    const measure = () => {
+      const stage = stageRef.current?.getBoundingClientRect();
+      if (!stage) return;
+      const next = chips.map((c) => {
+        const chip = chipRefs.current[c.layer]?.getBoundingClientRect();
+        const layer = layerRefs.current[c.layer]?.getBoundingClientRect();
+        if (!chip || !layer) return null;
+        const x2 = layer.left + layer.width * c.at[0] - stage.left;
+        const y2 = layer.top + layer.height * c.at[1] - stage.top;
+        let x1, y1, d;
+        if (c.anchor === "left") {
+          x1 = chip.right - stage.left;
+          y1 = chip.top + chip.height / 2 - stage.top;
+          const mid = (x1 + x2) / 2;
+          d = `M${x1},${y1} C${mid},${y1} ${mid},${y2} ${x2},${y2}`;
+        } else {
+          x1 = chip.left + chip.width / 2 - stage.left;
+          y1 = (c.anchor === "above" ? chip.bottom : chip.top) - stage.top;
+          const mid = (y1 + y2) / 2;
+          d = `M${x1},${y1} C${x1},${mid} ${x2},${mid} ${x2},${y2}`;
+        }
+        return { key: c.layer, d, x2, y2 };
+      });
+      setPaths(next.filter(Boolean));
+    };
+
+    // Wait for the layers to finish spreading out before measuring
+    const timer = setTimeout(measure, 1500);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", measure);
+    };
+  }, [stageRef, chipRefs, layerRefs]);
+
+  return paths;
+};
+
+function LayerCode() {
+  const widths = ["55%", "70%", "40%", "62%", "48%", "75%", "35%", "58%"];
+  return (
+    <div className="flex flex-col gap-1.5 p-3 pt-6">
+      {widths.map((w, i) => (
+        <span key={i} className="h-1.5 rounded" style={{ width: w, marginLeft: `${(i % 3) * 8}%`, background: i % 2 ? "rgba(125,211,252,.55)" : "rgba(196,181,253,.55)" }} />
+      ))}
+    </div>
+  );
+}
+
+function LayerCards() {
+  return (
+    <div className="grid grid-cols-3 gap-2 p-3 pt-7 h-full">
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <span key={i} className="rounded-md border border-indigo-200/50 bg-white/15" />
+      ))}
+    </div>
+  );
+}
+
+function LayerDesign() {
+  return (
+    <div className="flex flex-col gap-2 p-3 pt-6">
+      <div className="flex gap-1.5">
+        {["#818cf8", "#a78bfa", "#38bdf8", "#f0abfc", "#fff"].map((c) => (
+          <span key={c} className="w-5 h-5 rounded-full border border-white/40" style={{ background: c }} />
+        ))}
+      </div>
+      <span className="w-3/5 h-3 rounded bg-white/60" />
+      <span className="w-2/5 h-2 rounded bg-white/35" />
+    </div>
+  );
+}
+
+function LayerNav() {
+  return (
+    <div className="flex items-center gap-2 px-3 pt-6">
+      <span className="w-8 h-2.5 rounded bg-indigo-300/80" />
+      <span className="ml-auto w-6 h-1.5 rounded bg-white/50" />
+      <span className="w-6 h-1.5 rounded bg-white/50" />
+      <span className="w-6 h-1.5 rounded bg-white/50" />
+      <span className="w-9 h-3 rounded-full bg-violet-400/80" />
+    </div>
+  );
+}
+
+function LayerGrid() {
+  return (
+    <div className="grid grid-cols-4 gap-1.5 p-3 pt-6 h-full">
+      {[0, 1, 2, 3].map((i) => (
+        <span key={i} className="rounded-sm border border-dashed border-sky-200/60 bg-sky-300/10" />
+      ))}
+    </div>
+  );
+}
+
+const HeroVisual = () => {
+  const stageRef = useRef(null);
+  const chipRefs = useRef({});
+  const layerRefs = useRef({});
+  const paths = useConnectors(stageRef, chipRefs, layerRefs);
 
   return (
-    <section
-      id="home"
-      className="pt-16"
-      style={{
-        backgroundColor: "var(--paper)",
-      }}
-    >
-      {/* ==================================================
-          HERO CONTAINER
-      ================================================== */}
+  <div className="hero-stage" ref={stageRef} aria-hidden="true">
+    <svg className="connectors">
+      {paths.map((p) => (
+        <g key={p.key}>
+          <path d={p.d} />
+          <circle cx={p.x2} cy={p.y2} r="3.5" />
+        </g>
+      ))}
+    </svg>
 
-      <div
-        className="
-          max-w-[1200px]
-          mx-auto
-          px-6
-          sm:px-8
-          lg:px-12
-          pt-8
-          pb-10
-          md:pt-10
-          md:pb-12
-        "
-      >
+    <div className="stack">
+      {layers.map((layer, i) => (
         <div
-          className="
-            grid
-            grid-cols-1
-            lg:grid-cols-[0.95fr_1.05fr]
-            gap-10
-            lg:gap-16
-            items-start
-          "
+          key={layer.key}
+          ref={(el) => (layerRefs.current[layer.key] = el)}
+          className="layer"
+          style={{ "--depth": layers.length - i, animationDelay: `${0.15 * i}s` }}
         >
-          {/* ==================================================
-              LEFT — INTRO
-          ================================================== */}
+          <div className="pane-dots"><i /><i /><i /></div>
+          {layer.body}
+        </div>
+      ))}
 
-          <div className="relative z-10">
-            <span className="section-label afu-1">
-              Web Developer
-            </span>
+      {/* Front layer: a real site I built, scrolling on the laptop screen */}
+      <div className="laptop-screen" ref={(el) => (layerRefs.current.screen = el)}>
+        <img className="screen-site" src="images/projects/hero-screen.webp" alt="" decoding="async" />
+      </div>
+      <div className="laptop-deck" />
+    </div>
 
-            <h1
-              className="font-playfair afu-2 mt-3"
-              style={{
-                fontSize: "clamp(3rem, 5vw, 5rem)",
-                lineHeight: 0.98,
-                fontWeight: 700,
-                color: "var(--ink)",
-              }}
-            >
-              I build
-              <br />
-              things.
-              <br />
+    {chips.map((c) => (
+      <div
+        key={c.label}
+        ref={(el) => (chipRefs.current[c.layer] = el)}
+        className="chip"
+        style={{ ...c.style, animationDelay: c.delay }}
+      >
+        {c.icon}
+        {c.label}
+      </div>
+    ))}
+  </div>
+  );
+};
 
-              I find joy
-              <br />
+export const Home = () => {
+  return (
+    <section id="home" className="pt-28 pb-14 lg:pt-32 lg:pb-16 overflow-hidden">
+      <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 items-center">
+        <div>
+          <p className="eyebrow mb-5">Danielle Turner · Frontend Developer</p>
+          {/* <p className="eyebrow mb-5">Web Developer · Creative · Problem-Solver</p> */}
 
-              <em
-                style={{
-                  fontStyle: "italic",
-                  color: "var(--rust)",
-                  fontWeight: 600,
-                }}
-              >
-                everywhere.
-              </em>
-            </h1>
+          <h1 className="font-semibold tracking-tight text-[var(--navy)] leading-[1.02] text-[clamp(2.6rem,6vw,4.1rem)]">
+            Modern Websites
+            <br />
+            <span className="gradient-text">Real Solutions.</span>
+          </h1>
 
-            <p
-              className="
-                afu-3
-                mt-7
-                leading-relaxed
-                max-w-[500px]
-              "
-              style={{
-                fontSize: "clamp(0.95rem, 1.5vw, 1.05rem)",
-                color: "var(--light-ink)",
-              }}
-            >
-              <strong
-                style={{
-                  color: "var(--ink)",
-                  fontWeight: 500,
-                }}
-              >
-                Frontend developer
-              </strong>{" "}
-              specializing in React, Tailwind CSS &amp; responsive design,
-              driven by the same curiosity that takes me to new restaurants.
-              Code and cuisine, same philosophy:{" "}
-              <strong
-                style={{
-                  color: "var(--ink)",
-                  fontWeight: 500,
-                }}
-              >
-                the details make it unforgettable.
-              </strong>
-            </p>
+          <p className="mt-6 max-w-[480px] text-[1.08rem] leading-relaxed text-[var(--muted)]">
+            I build modern, responsive websites, solve technical problems, and
+            explore new technologies with a passion for creating accessible and
+            engaging experiences.
+          </p>
 
-            {/* Buttons */}
-
-            <div className="afu-4 flex flex-wrap gap-3 mt-8">
-              <a href="#projects" className="btn-filled">
-                View my work
-              </a>
-
-              <a href="#contact" className="btn-outline">
-                Let's connect
-              </a>
-            </div>
+          <div className="flex flex-wrap gap-4 mt-8">
+            <a href="#projects" className="btn btn-primary">
+              Explore My Work <FiArrowRight />
+            </a>
+            <a href="#playground" className="btn btn-outline">
+              See How I Build
+            </a>
           </div>
+        </div>
 
-          {/* ==================================================
-              RIGHT — CONSTELLATION AREA
-          ================================================== */}
-
-          <div
-            className="
-              relative
-              w-full
-              max-w-[580px]
-              mx-auto
-              lg:ml-auto
-            "
-          >
-            {/* ==================================================
-                RIGHT HEADING
-
-                This now sits OUTSIDE the cream panel so
-                CODE × CUISINE aligns with WEB DEVELOPER.
-            ================================================== */}
-
-            <div
-              className="
-                flex
-                items-center
-                justify-between
-                gap-4
-                mb-3
-              "
-            >
-              <span
-                className="font-mono-dm uppercase"
-                style={{
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.18em",
-                  color: "var(--rust)",
-                  fontWeight: 600,
-                }}
-              >
-                Code × Cuisine
-              </span>
-
-              <span
-                className="font-mono-dm uppercase"
-                style={{
-                  fontSize: "0.62rem",
-                  letterSpacing: "0.14em",
-                  color: "var(--light-ink)",
-                  fontWeight: 500,
-                }}
-              >
-                Things I Enjoy
-              </span>
-            </div>
-
-            {/* ==================================================
-                CREAM CONSTELLATION PANEL
-            ================================================== */}
-
-            <div
-              className="
-                px-5
-                sm:px-7
-                py-5
-                sm:py-6
-              "
-              style={{
-                backgroundColor: "var(--cream)",
-                border: "1px solid var(--border)",
-              }}
-            >
-              {/* ==================================================
-                  CONSTELLATION
-              ================================================== */}
-
-              <div
-                className="
-                  relative
-                  w-full
-                  aspect-square
-                  max-h-[500px]
-                "
-              >
-                {/* Outer circle */}
-
-                <div
-                  className="absolute rounded-full"
-                  style={{
-                    width: "78%",
-                    height: "78%",
-                    left: "11%",
-                    top: "11%",
-                    border: "1px solid rgba(92,82,74,0.38)",
-                  }}
-                />
-
-                {/* Inner circle */}
-
-                <div
-                  className="absolute rounded-full"
-                  style={{
-                    width: "48%",
-                    height: "48%",
-                    left: "26%",
-                    top: "26%",
-                    border: "1px dashed rgba(92,82,74,0.32)",
-                  }}
-                />
-
-                {/* ==================================================
-                    CONNECTOR LINES
-                ================================================== */}
-
-                <svg
-                  className="
-                    absolute
-                    inset-0
-                    w-full
-                    h-full
-                    pointer-events-none
-                  "
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  {/* Main connections */}
-
-                  {mainConnections.map(
-                    ([startIndex, endIndex], index) => {
-                      const start = nodes[startIndex];
-                      const end = nodes[endIndex];
-
-                      return (
-                        <line
-                          key={`main-${index}`}
-                          x1={start.x}
-                          y1={start.y}
-                          x2={end.x}
-                          y2={end.y}
-                          stroke="var(--light-ink)"
-                          strokeWidth="1"
-                          vectorEffect="non-scaling-stroke"
-                          opacity="0.58"
-                        />
-                      );
-                    }
-                  )}
-
-                  {/* Cross connections */}
-
-                  {crossConnections.map(
-                    ([startIndex, endIndex], index) => {
-                      const start = nodes[startIndex];
-                      const end = nodes[endIndex];
-
-                      return (
-                        <line
-                          key={`cross-${index}`}
-                          x1={start.x}
-                          y1={start.y}
-                          x2={end.x}
-                          y2={end.y}
-                          stroke="var(--rust)"
-                          strokeWidth="0.8"
-                          strokeDasharray="3 3"
-                          vectorEffect="non-scaling-stroke"
-                          opacity="0.5"
-                        />
-                      );
-                    }
-                  )}
-                </svg>
-
-                {/* ==================================================
-                    CENTER
-                ================================================== */}
-
-                <div
-                  className="
-                    absolute
-                    left-1/2
-                    top-1/2
-                    -translate-x-1/2
-                    -translate-y-1/2
-                    text-center
-                    z-10
-                    w-[200px]
-                    sm:w-[230px]
-                  "
-                >
-                  {/* Center node */}
-
-                  <div
-                    className="
-                      mx-auto
-                      mb-4
-                      w-3
-                      h-3
-                      rounded-full
-                    "
-                    style={{
-                      backgroundColor: "var(--rust)",
-                      boxShadow:
-                        "0 0 0 8px rgba(47,107,79,0.12)",
-                    }}
-                  />
-
-                  <span
-                    className="
-                      font-mono-dm
-                      uppercase
-                      block
-                    "
-                    style={{
-                      fontSize: "0.62rem",
-                      letterSpacing: "0.16em",
-                      color: "var(--rust)",
-                      fontWeight: 600,
-                    }}
-                  >
-                    Curiosity connects it all
-                  </span>
-
-                  <p
-                    className="
-                      font-playfair
-                      italic
-                      mt-3
-                    "
-                    style={{
-                      fontSize:
-                        "clamp(1.25rem, 2vw, 1.6rem)",
-                      lineHeight: 1.25,
-                      color: "var(--ink)",
-                    }}
-                  >
-                    Clean code
-                    <br />
-                    &amp; bold flavors
-                  </p>
-                </div>
-
-                {/* ==================================================
-                    NODES
-                ================================================== */}
-
-                {nodes.map((node) => {
-                  const nodeColor = getNodeColor(node.type);
-
-                  return (
-                    <div
-                      key={node.label}
-                      className="absolute z-20"
-                      style={{
-                        left: `${node.x}%`,
-                        top: `${node.y}%`,
-                        transform:
-                          "translate(-50%, -50%)",
-                      }}
-                    >
-                      <div
-                        className="
-                          flex
-                          flex-col
-                          items-center
-                          text-center
-                        "
-                      >
-                        {/* TECH */}
-
-                        {node.type === "tech" && (
-                          <div
-                            className="
-                              rounded-full
-                              w-[11px]
-                              h-[11px]
-                            "
-                            style={{
-                              backgroundColor: nodeColor,
-                              boxShadow:
-                                "0 0 0 6px rgba(47,107,79,0.10)",
-                            }}
-                          />
-                        )}
-
-                        {/* FOOD */}
-
-                        {node.type === "food" && (
-                          <div
-                            className="
-                              rounded-full
-                              w-[10px]
-                              h-[10px]
-                            "
-                            style={{
-                              backgroundColor: nodeColor,
-                            }}
-                          />
-                        )}
-
-                        {/* CURIOSITY */}
-
-                        {node.type === "curiosity" && (
-                          <div
-                            className="
-                              flex
-                              items-center
-                              justify-center
-                              rounded-full
-                              w-[20px]
-                              h-[20px]
-                            "
-                            style={{
-                              border:
-                                "2px solid var(--rust)",
-                              backgroundColor:
-                                "var(--cream)",
-                            }}
-                          >
-                            <span
-                              className="
-                                block
-                                rounded-full
-                                w-[6px]
-                                h-[6px]
-                              "
-                              style={{
-                                backgroundColor:
-                                  "var(--rust)",
-                              }}
-                            />
-                          </div>
-                        )}
-
-                        {/* Node name */}
-
-                        <span
-                          className="
-                            font-mono-dm
-                            uppercase
-                            whitespace-nowrap
-                            mt-2
-                          "
-                          style={{
-                            fontSize:
-                              "clamp(0.62rem, 1vw, 0.72rem)",
-                            letterSpacing: "0.08em",
-                            color: "var(--ink)",
-                            fontWeight: 600,
-                          }}
-                        >
-                          {node.label}
-                        </span>
-
-                        {/* Node category */}
-
-                        <span
-                          className="
-                            font-mono-dm
-                            uppercase
-                            mt-1
-                          "
-                          style={{
-                            fontSize: "0.6rem",
-                            letterSpacing: "0.1em",
-                            color: "var(--light-ink)",
-                            fontWeight: 500,
-                          }}
-                        >
-                          {node.type}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* ==================================================
-                  LEGEND
-              ================================================== */}
-
-              <div
-                className="
-                  flex
-                  flex-col
-                  sm:flex-row
-                  items-center
-                  sm:justify-between
-                  gap-4
-                  pt-5
-                  mt-3
-                "
-                style={{
-                  borderTop: "1px solid var(--border)",
-                }}
-              >
-                <div
-                  className="
-                    flex
-                    flex-wrap
-                    justify-center
-                    items-center
-                    gap-5
-                  "
-                >
-                  {/* Tech */}
-
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{
-                        backgroundColor: "var(--rust)",
-                      }}
-                    />
-
-                    <span
-                      className="font-mono-dm uppercase"
-                      style={{
-                        fontSize: "0.55rem",
-                        letterSpacing: "0.12em",
-                        color: "var(--light-ink)",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Tech
-                    </span>
-                  </div>
-
-                  {/* Food */}
-
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{
-                        backgroundColor: "var(--gold)",
-                      }}
-                    />
-
-                    <span
-                      className="font-mono-dm uppercase"
-                      style={{
-                        fontSize: "0.55rem",
-                        letterSpacing: "0.12em",
-                        color: "var(--light-ink)",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Food
-                    </span>
-                  </div>
-
-                  {/* Curiosity */}
-
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="
-                        flex
-                        items-center
-                        justify-center
-                        w-3
-                        h-3
-                        rounded-full
-                      "
-                      style={{
-                        border: "1px solid var(--rust)",
-                      }}
-                    >
-                      <span
-                        className="w-1 h-1 rounded-full"
-                        style={{
-                          backgroundColor: "var(--rust)",
-                        }}
-                      />
-                    </span>
-
-                    <span
-                      className="font-mono-dm uppercase"
-                      style={{
-                        fontSize: "0.55rem",
-                        letterSpacing: "0.12em",
-                        color: "var(--light-ink)",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Curiosity
-                    </span>
-                  </div>
-                </div>
-
-                <span
-                  className="
-                    font-mono-dm
-                    uppercase
-                    text-center
-                  "
-                  style={{
-                    fontSize: "0.55rem",
-                    letterSpacing: "0.12em",
-                    color: "var(--light-ink)",
-                    fontWeight: 500,
-                  }}
-                >
-                   Exploring what's next
-                </span>
-              </div>
-            </div>
-          </div>
+        <div className="hidden sm:block">
+          <HeroVisual />
         </div>
       </div>
     </section>

@@ -4,25 +4,25 @@ Personal portfolio built with React, Vite, and Tailwind CSS.
 
 This project has two working directions:
 - `main` keeps the original developer portfolio version.
-- `foodie-rebrand` adds a food-inspired personal brand direction while keeping the same site structure (`Home`, `About`, `Projects`, `Contact`).
+- DaniBytes is my personal portfolio website, showcasing client websites, personal projects, and my growth as a frontend developer, from building sites to maintaining them and exploring. 
 
 ## Live Site
 
-- https://my-portfolio-lime-ten.vercel.app/
+- https://danibytesdev.netlify.app/
 
 ## Tech Stack
 
 - React
 - Vite
 - Tailwind CSS
-- EmailJS
+- Netlify Forms
 
 ## Features
 
 - Responsive layout for mobile and desktop
 - Loading intro screen and scroll reveal animations
 - Project showcase with external demo/repo links
-- Contact form using EmailJS
+- Contact form using Netlify Forms
 - Accessibility-focused contrast updates
 
 ## Local Development
@@ -40,5 +40,4 @@ npm run lint
 
 ## Notes
 
-The foodie concept in `foodie-rebrand` is intentionally developer-first.
-It reflects personal identity and creative perspective without changing role focus to chef/recipe content.
+DaniBytes is my personal portfolio website, showcasing my web development projects, technical skills, and journey as a developer.
