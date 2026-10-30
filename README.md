@@ -8,7 +8,7 @@ This project has two working directions:
 
 ## Live Site
 
-- https://danibytesdev.netlify.app/
+- https://danibytes.dev/
 
 ## Tech Stack
 
