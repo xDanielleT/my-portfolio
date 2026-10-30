@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaCodepen } from "react-icons/fa";
-import { FiArrowRight, FiGlobe } from "react-icons/fi";
+import { FiArrowRight, FiMapPin } from "react-icons/fi";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { links } from "../../data/content";
 
@@ -13,10 +13,10 @@ const subjects = [
 ];
 
 const contactItems = [
-  { icon: <FiGlobe />, label: "Remote" },
+    { icon: <FiMapPin />, label: "Remote" },
   { icon: <FaLinkedin />, label: "linkedin.com/in/danielle-turner680-", href: links.linkedin },
   { icon: <FaGithub />, label: "github.com/xDanielleT", href: links.github },
-  { icon: <FaCodepen />, label: "codepen.io/10Danii01", href: links.codepen },
+  // { icon: <FaCodepen />, label: "codepen.io/10Danii01", href: links.codepen },
 ];
 
 const emptyForm = { name: "", email: "", subject: "", message: "" };
@@ -49,9 +49,9 @@ export const Contact = () => {
 
   return (
     <section id="contact" className="sheet py-14 lg:py-16">
-      <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
+      <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start lg:items-center">
         <RevealOnScroll>
-          <p className="eyebrow mb-3">Would love to hear from you!</p>
+          {/* <p className="eyebrow mb-3">Would love to hear from you!</p> */}
           <h2 className="section-title">Get in Touch</h2>
           <p className="mt-4 leading-relaxed text-[var(--muted)] max-w-sm">
             Have a project, opportunity, or just want to connect? I'd love to

@@ -182,14 +182,14 @@ export const Home = () => {
     <section id="home" className="pt-28 pb-8 sm:pb-14 lg:pt-32 lg:pb-16 overflow-hidden">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 items-center">
         <div>
-          <p className="eyebrow mb-3 sm:mb-5 tracking-[0.18em] sm:tracking-[0.32em]">Danielle Turner / Web Developer &amp; Creative Builder</p>
+        <p className="eyebrow mb-3 sm:mb-5">Danielle Turner / Web Developer & Creative Builder</p>
 
           <h1 className="font-semibold tracking-tight text-[var(--navy)] leading-[1.04] text-[clamp(2.3rem,6vw,4.1rem)]">
             The code was just
             <br />
             <span className="gradient-text">the beginning.</span>
           </h1>
-
+                    
           <p className="mt-4 sm:mt-6 max-w-[480px] text-[1.02rem] sm:text-[1.08rem] leading-relaxed text-[var(--muted)]">
             What started with building websites grew into something bigger: a
             curiosity for what technology can do and the creativity to explore

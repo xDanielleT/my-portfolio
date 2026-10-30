@@ -135,7 +135,7 @@ export const Playground = () => {
       <div className="container-x grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-10 items-start">
         <RevealOnScroll>
           <div className="note note-peach pin-gold note-heading">
-            <p className="eyebrow mb-3">Pinned comments from DaniBytes</p>
+            {/* <p className="eyebrow mb-3">Pinned comments from DaniBytes</p> */}
             <h2 className="section-title">
               <span className="title-slashes" aria-hidden="true">//</span> Notes to Self
             </h2>

@@ -31,7 +31,7 @@ export const Footer = () => (
       </div>
 
       <div className="flex flex-col sm:flex-row sm:justify-between gap-2 mt-6 text-xs text-[var(--soft)]">
-        <p>© {new Date().getFullYear()} DaniBytes. Built with purpose, curiosity, and a love for the web.</p>
+        <p>© {new Date().getFullYear()} Danielle Turner · DaniBytes. Built with purpose, curiosity, and a love for the web.</p>
         <p>Part Developer · Part Creator · Part Problem-Solver · All Purpose ♡</p>
       </div>
     </div>

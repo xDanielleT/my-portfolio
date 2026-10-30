@@ -229,7 +229,7 @@ h3,
 
   .layer {
     --gap: 80px;
-    background: linear-gradient(150deg, rgba(49, 46, 129, 0.88), rgba(67, 56, 202, 0.72) 55%, rgba(14, 165, 233, 0.55));
+    background: rgba(67, 56, 202, 0.82);
     border: 1px solid rgba(165, 180, 252, 0.75);
     box-shadow:
       0 0 24px rgba(129, 140, 248, 0.35),

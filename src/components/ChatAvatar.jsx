@@ -79,14 +79,24 @@ const reply = (question) => {
   return answers[topic ? topic.key : "fallback"]();
 };
 
+// The greeting bubble picks one of these at random on each visit
+const hintLines = [
+  "Curious what I've built? Ask me ",
+  "The code was just the beginning. Ask me what's next.",
+  "Want the short version? Ask me anything.",
+  "Looking for something specific? Just ask me",
+];
+
+
 const greeting = {
   from: "bot",
-  text: "Hi, I'm Dani! 👋 I'm a frontend developer. Ask me anything about my work, or tap a question below.",
+  text: "Welcome! 👋 Ask me anything about my work, or tap a question below to get started.",
 };
 
 export const ChatAvatar = () => {
   const [open, setOpen] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [hintLine] = useState(() => hintLines[Math.floor(Math.random() * hintLines.length)]);
   const [messages, setMessages] = useState([greeting]);
   const [typing, setTyping] = useState(false);
   const [input, setInput] = useState("");
@@ -95,9 +105,9 @@ export const ChatAvatar = () => {
 
   // Wave hello once, a few seconds after the page loads
   useEffect(() => {
-        // Only on larger screens: on phones the bubble covers too much of the page
+    // Only on larger screens: on phones the bubble covers too much of the page
     if (!window.matchMedia("(min-width: 768px)").matches) return;
-    const t = setTimeout(() => setShowHint(true), 8000);
+    const t = setTimeout(() => setShowHint(true), 2000);
     return () => clearTimeout(t);
   }, []);
 
@@ -213,7 +223,7 @@ export const ChatAvatar = () => {
       {!open && showHint && (
         <div className="chat-hint">
           <button type="button" className="chat-hint-text" onClick={() => setOpen(true)}>
-            Hi! Ask me about my work 👋
+            {hintLine}
           </button>
           <button type="button" className="chat-hint-close" aria-label="Dismiss" onClick={() => setShowHint(false)}>
             <FiX />
@@ -231,7 +241,7 @@ export const ChatAvatar = () => {
         aria-expanded={open}
       >
         <img src={AVATAR} alt="" />
-        
+
       </button>
     </div>
   );

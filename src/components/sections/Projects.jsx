@@ -120,7 +120,7 @@ export const Projects = () => {
     <section id="projects" className="sheet py-14 lg:py-16">
       <div className="container-x grid grid-cols-1 lg:grid-cols-[330px_1fr] gap-10">
         <RevealOnScroll>
-          <p className="eyebrow mb-3">Client Work · Personal Projects</p>
+          {/* <p className="eyebrow mb-3">Client Work · Personal Projects</p> */}
           <h2 className="section-title">The Living Archive</h2>
           <p className="mt-5 leading-relaxed text-[var(--muted)]">
             Client websites built for real organizations, plus personal projects
@@ -159,7 +159,7 @@ export const Projects = () => {
           </div>
 
           {view === "row" && (
-            <p className="swipe-hint" aria-hidden="true">
+            <p className="swipe-hint lg:hidden" aria-hidden="true">
               {visible.length} projects · swipe or use the arrows to see more →
             </p>
           )}

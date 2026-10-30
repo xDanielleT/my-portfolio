@@ -52,7 +52,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
           ))}
         </div>
 
-        <a href="#contact" className="btn btn-dark hidden lg:inline-flex">
+        <a href="#contact" className="btn btn-primary hidden lg:inline-flex">
           Let's Connect <FiArrowRight />
         </a>
 
