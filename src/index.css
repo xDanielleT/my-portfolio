@@ -1270,3 +1270,18 @@ h3,
   .chat-launcher { width: 52px; height: 52px; box-shadow: 0 0 0 2px var(--primary), 0 10px 22px -8px rgba(39, 34, 120, 0.5); }
   .chat-status { width: 11px; height: 11px; right: 1px; bottom: 1px; }
 }
+/* ---------- Security Weekly page ---------- */
+@layer components {
+  .sw-how,
+  .sw-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.35rem;
+  }
+  .sw-item {
+    border-left-width: 5px;
+    margin-bottom: 1rem;
+  }
+}

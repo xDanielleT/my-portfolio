@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-02",
+  "overview": "SAMPLE DATA so you can see the page before the agent's first run. Delete this file and its index.json entry once the real brief publishes.",
+  "items": [
+    {
+      "title": "Example: game engine flaw lets malicious files run code",
+      "summary": "A sample item showing how a vulnerability in a tool on your watchlist appears at the top of the brief.",
+      "action": "Update the editor and rebuild any shipped games with the patched version.",
+      "helpDesk": "Users who build or run games may need help updating installed software safely.",
+      "severity": "high",
+      "exploited": false,
+      "affectsMyStack": true,
+      "matched": ["Unity"],
+      "source": "Sample",
+      "url": "#",
+      "date": "2026-11-02"
+    },
+    {
+      "title": "Example: actively exploited VPN vulnerability",
+      "summary": "A sample item showing how a CISA 'known exploited' entry is labeled.",
+      "action": "Apply the vendor patch or disconnect the device until patched.",
+      "helpDesk": "Remote workers may lose VPN access during emergency patching; expect tickets.",
+      "severity": "critical",
+      "exploited": true,
+      "affectsMyStack": false,
+      "matched": [],
+      "source": "CISA KEV",
+      "url": "#",
+      "date": "2026-11-01"
+    },
+    {
+      "title": "Example: phishing campaign impersonates package delivery",
+      "summary": "A sample medium-severity news item.",
+      "action": "Remind users to check delivery status on the carrier's site, not via email links.",
+      "helpDesk": "Expect password reset requests from users who clicked; know your reset process.",
+      "severity": "medium",
+      "exploited": false,
+      "affectsMyStack": false,
+      "matched": [],
+      "source": "Sample",
+      "url": "#",
+      "date": "2026-10-30"
+    }
+  ]
+}
