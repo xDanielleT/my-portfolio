@@ -1,0 +1,29 @@
+name: Security Weekly
+
+on:
+  schedule:
+    - cron: "0 13 * * 1"   # Mondays 13:00 UTC (8am Central)
+  workflow_dispatch:        # adds a "Run workflow" button for testing
+
+permissions:
+  contents: write           # lets the job commit the new brief
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Commit new brief
+        run: |
+          git config user.name "security-weekly-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/briefs/
+          git diff --cached --quiet || git commit -m "Security Weekly: $(date -u +%F)"
+          git push

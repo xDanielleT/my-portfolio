@@ -64,8 +64,13 @@ const ProjectModal = ({ project, onClose }) => {
 
           <div className="flex flex-wrap gap-3 mt-6">
             {project.demo && (
-              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Visit Site <FiExternalLink />
+              <a
+                href={project.demo}
+                // pages on this site open in the same tab; outside sites open in a new one
+                {...(/^https?:/.test(project.demo.trim()) && { target: "_blank", rel: "noopener noreferrer" })}
+                className="btn btn-primary"
+              >
+                {project.demoLabel ?? "Visit Site"} <FiExternalLink />
               </a>
             )}
             {project.github && (

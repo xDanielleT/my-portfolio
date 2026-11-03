@@ -77,6 +77,18 @@ export const projects = [
     accent: ["#10b981", "#3b82f6"],
   },
   {
+    title: "Security Weekly (AI Agent)",
+    short: "Security Weekly",
+    type: "Personal · AI Agent",
+    category: "Personal Projects",
+    desc: "An automated agent that runs every Monday: it pulls CISA's Known Exploited Vulnerabilities list and security news feeds, flags anything affecting tools I use, has Claude summarize each item in plain language with a help desk angle, and publishes the brief to this site through GitHub Actions and Netlify.",
+    tags: ["Node.js", "Claude API", "GitHub Actions", "Netlify", "React"],
+    github: "https://github.com/xDanielleT/my-portfolio",
+    demo: "security-weekly.html",
+    demoLabel: "Read the Briefs",
+    accent: ["#047857", "#0f1238"],
+  },
+  {
     title: "Real-Time Chat App",
     short: "Real-Time Chat",
     image: "images/projects/chat.png",
