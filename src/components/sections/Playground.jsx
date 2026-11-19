@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiArrowRight, FiCode, FiMove } from "react-icons/fi";
 import { SiCss3, SiGit, SiJavascript, SiNextdotjs, SiReact, SiTailwindcss } from "react-icons/si";
-import { MdOutlineSecurity, MdLan, MdTerminal, MdShield } from "react-icons/md";
+import { MdOutlineSecurity, MdAccountTree, MdSportsEsports } from "react-icons/md";
+import { FaRobot } from "react-icons/fa";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { about, allSkills, education, exploring, featuredSkills, links } from "../../data/content";
 
@@ -15,7 +16,7 @@ const skillIcons = {
   Git: <SiGit className="text-orange-600" />,
 };
 
-const topicIcons = [<MdLan />, <MdShield />, <MdOutlineSecurity />, <MdTerminal />];
+const topicIcons = [<FaRobot />, <MdAccountTree />, <MdSportsEsports />, <MdOutlineSecurity />];
 
 // Resting tilt for each note, like paper pinned up by hand
 const tilts = [-2.5, -1.5, 1.5, -1];
@@ -189,7 +190,7 @@ export const Playground = () => {
 
             {/* Currently Exploring */}
             <div {...cardProps(1)}>
-              <CardHeader icon={<MdOutlineSecurity />} title="Currently Exploring" onHandle={startDrag(1)} />
+              <CardHeader icon={<FaRobot />} title="Currently Exploring" onHandle={startDrag(1)} />
               <p className="text-[0.85rem] font-semibold text-[var(--navy)]">{exploring.title}</p>
               <p className="text-[0.78rem] text-[var(--muted)] mt-1 mb-3 leading-snug">{exploring.note}</p>
               <ul className="space-y-2.5">

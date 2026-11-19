@@ -77,6 +77,18 @@ export const projects = [
     accent: ["#10b981", "#3b82f6"],
   },
   {
+    title: "Job Fit Analyzer",
+    short: "Job Fit Analyzer",
+    image: "images/projects/jfa-canvas.jpg",
+    type: "Personal · Automation",
+    category: "Personal Projects",
+    desc: "An n8n automation that scores job postings against my confirmed skills using the Claude API, logs each result to Google Sheets, and emails me a summary. Includes JSON validation, retries, and an alert email when the AI reply can't be read.",
+    tags: ["n8n", "Claude API", "Google Sheets", "Gmail", "JavaScript"],
+    github: "https://github.com/xDanielleT/job-fit-analyzer",
+    demo: "/projects/job-fit-analyzer/index.html",
+    accent: ["#0b6b5d", "#f59e0b"],
+  },
+  {
     title: "Real-Time Chat App",
     short: "Real-Time Chat",
     image: "images/projects/chat.png",
@@ -137,18 +149,18 @@ export const featuredSkills = [
 
 export const allSkills = [
   "React", "Next.js", "Tailwind CSS", "JavaScript", "HTML / CSS", "GitHub",
-  "Responsive Design", "Git", "REST APIs", "Shopify", "Liquid", "Cloudinary",
-  "Vercel", "WordPress", "Squarespace", "Node.js", "PHP", "Socket.io", "Figma", "Power Automate",
+  "Responsive Design", "Git", "APIs", "Shopify", "Liquid", "Cloudinary",
+  "Vercel", "WordPress", "Squarespace", "Node.js", "PHP", "Socket.io", "Figma", "Power Automate", "n8n", "Claude API",
 ];
 
 export const exploring = {
-  title: "Expanding into Cybersecurity",
-  note: "Channeling a builder's eye for detail into breaking and defending systems.",
+  title: "AI Automation and Agents",
+  note: "Building small tools that save time, and learning to make them reliable.",
   topics: [
-    "Network security",
-    "Secure coding",
-    "Threat analysis",
-    "Linux fundamentals",
+    "AI agents (Claude API)",
+    "Workflow automation (n8n)",
+    "Game development (Unity)",
+    "Cybersecurity",
   ],
 };
 
